@@ -48,12 +48,11 @@ namespace AppWeb.Controllers
                 string name = Request["usertxt"];
                 string password = Request["passtxt"];                
                 string cs = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-                string query = $"SELECT * FROM UserTbl WHERE Usuario = '{name}' and Clave = '{password}'";
                 using (SqlConnection con = new SqlConnection(cs))
                 {
                     con.Open();
 
-                    using (SqlCommand command = new SqlCommand(query, con))
+                    using (SqlCommand command = new SqlCommand("GetAllUser", con))
                     {
                         using (SqlDataReader reader = command.ExecuteReader())
                         {

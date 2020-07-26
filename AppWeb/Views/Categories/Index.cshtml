@@ -14,7 +14,7 @@
  
     <input type="text" id="userbox" name="categorytxt" class="form-control mb-4" placeholder="Category">
 
-    <button class="btn btn-info btn-block my-4" value="Add" id="addbtn" name="AddCategory" type="submit">Add</button>
+    <button class="btn btn-primary btn-block" value="Add" id="addbtn" name="btncategory" type="submit">Add</button>
 </form>
 <div>
     @foreach (var item in Model)
@@ -34,8 +34,15 @@
             <table class="table">
                 <tbody>
                     <tr>
-                        <td>@item.categorie</td>
-                    </tr>
+                        <td>
+
+                            @item.categorie
+                            <form>
+                                <button class="btn btn-danger" value="Delete" id="@item.idcategorie" name="btncategory" type="submit">Delete</button>
+                            </form>
+
+                        </td>
+                    </tr>                  
                 </tbody>
             </table>
         }

@@ -21,11 +21,18 @@ namespace AppWeb.Controllers
             var x = GetCategories();
             try
             {
-                string btnclick = Request["AddCategory"];
+                string btnclick = Request["btncategory"];
+                //string deleteclick = Request["DeleteCategory"];
                 if (btnclick == "Add")
                 {
                     categorie.categorie = Request["categorytxt"];
-                    InsertCategorie(categorie);
+                    InsertCategory(categorie);
+                    return View(x);
+                }
+
+                if (btnclick == "Delete")
+                {                    
+                    DeleteCategory(categorie);
                     return View(x);
                 }
             }
@@ -42,12 +49,11 @@ namespace AppWeb.Controllers
             {               
                 List<Categorie> categories = new List<Categorie>();
                 string cs = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-                string query = $"SELECT * FROM CategoriaTbl";
                 using (SqlConnection con = new SqlConnection(cs))
                 {
                     con.Open();
 
-                    using (SqlCommand command = new SqlCommand(query, con))
+                    using (SqlCommand command = new SqlCommand("GetAllCategories", con))
                     {
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
@@ -81,7 +87,7 @@ namespace AppWeb.Controllers
             }
         }
 
-        public void InsertCategorie(Categorie categorie)
+        public void InsertCategory(Categorie categorie)
         {
             string cs = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
             try
@@ -103,6 +109,29 @@ namespace AppWeb.Controllers
                 Debug.WriteLine($"Error: {ea.Message}");
             }
 
+        }
+    
+        public void DeleteCategory(Categorie categorie)
+        {
+            string cs = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+            try
+            {
+                SqlConnection sqlConnection = new SqlConnection(cs);
+                using (SqlCommand command = new SqlCommand("DeleteCategory", sqlConnection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.Add("@idcategory", SqlDbType.Int);
+                    command.Parameters["@idcategory"].Value = categorie.idcategorie;
+                    sqlConnection.Open();
+                    command.ExecuteNonQuery();
+                }
+                sqlConnection.Close();
+                Debug.WriteLine("Categoria eliminada");
+            }
+            catch (Exception ea)
+            {
+                Debug.WriteLine($"Error: {ea.Message}");
+            }
         }
     }
 }
