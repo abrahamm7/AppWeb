@@ -23,9 +23,6 @@ namespace AppWeb.Controllers
             try
             {               
                 List<Categorie> categories = new List<Categorie>();
-
-                string name = Request["usertxt"];
-                string password = Request["passtxt"];
                 string cs = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
                 string query = $"SELECT * FROM CategoriaTbl";
                 using (SqlConnection con = new SqlConnection(cs))
