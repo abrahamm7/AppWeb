@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
@@ -40,10 +41,18 @@ namespace AppWeb.Controllers
             string cs = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
             try
             {
-                string query = $"INSERT INTO UserTbl(Usuario, Nombre, Apellido, Clave)values('{user.username}','{user.name}','{user.lastname}','{user.password}')";
                 SqlConnection sqlConnection = new SqlConnection(cs);
-                using (SqlCommand command = new SqlCommand(query, sqlConnection))
+                using (SqlCommand command = new SqlCommand("InsertUser", sqlConnection))
                 {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.Add("@nombre", SqlDbType.VarChar);
+                    command.Parameters["@nombre"].Value = user.name; 
+                    command.Parameters.Add("@apellido", SqlDbType.VarChar);
+                    command.Parameters["@apellido"].Value = user.lastname; 
+                    command.Parameters.Add("@clave", SqlDbType.VarChar);
+                    command.Parameters["@clave"].Value = user.password; 
+                    command.Parameters.Add("@usuario", SqlDbType.VarChar);
+                    command.Parameters["@usuario"].Value = user.username;
                     sqlConnection.Open();
                     command.ExecuteNonQuery();
                 }

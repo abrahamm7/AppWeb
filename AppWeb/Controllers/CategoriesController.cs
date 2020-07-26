@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
@@ -84,11 +85,13 @@ namespace AppWeb.Controllers
         {
             string cs = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
             try
-            {
-                string query = $"INSERT INTO CategoriaTbl(Categoria)values('{categorie.categorie}')";
+            {                
                 SqlConnection sqlConnection = new SqlConnection(cs);
-                using (SqlCommand command = new SqlCommand(query, sqlConnection))
+                using (SqlCommand command = new SqlCommand("InsertCategory", sqlConnection))
                 {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.Add("@categoria", SqlDbType.VarChar);
+                    command.Parameters["@categoria"].Value = categorie.categorie;                   
                     sqlConnection.Open();
                     command.ExecuteNonQuery();
                 }
