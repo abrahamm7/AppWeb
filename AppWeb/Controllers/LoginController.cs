@@ -22,9 +22,8 @@ namespace AppWeb.Controllers
                 {
                     var x = GetUser();
                     if (x != null)
-                    {
-                        Debug.WriteLine($"Este usuario existe: {x.First().name + x.First().iduser}");
-                        //return RedirectToAction("", "");
+                    {                        
+                        return RedirectToAction("Index", "Categories");
                     }
                     else
                     {

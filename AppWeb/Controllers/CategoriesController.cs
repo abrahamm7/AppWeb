@@ -16,6 +16,21 @@ namespace AppWeb.Controllers
         public ActionResult Index()
         {
             var x = GetCategories();
+            Categorie categorie = new Categorie();
+            try
+            {
+                string btnclick = Request["categorybutton"];
+                if (btnclick == "addcategory")
+                {
+                    categorie.categorie = Request["categorytext"];
+                    InsertCategorie(categorie);
+                    return View(x);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error en: {ex.Message}");
+            }
             return View(x);
         }
         
@@ -62,6 +77,28 @@ namespace AppWeb.Controllers
                 Debug.WriteLine($"Error: {ex.Message}");
                 return null;
             }
+        }
+
+        public void InsertCategorie(Categorie categorie)
+        {
+            string cs = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+            try
+            {
+                string query = $"INSERT INTO CategoriaTbl(Categoria)values('{categorie.categorie}')";
+                SqlConnection sqlConnection = new SqlConnection(cs);
+                using (SqlCommand command = new SqlCommand(query, sqlConnection))
+                {
+                    sqlConnection.Open();
+                    command.ExecuteNonQuery();
+                }
+                sqlConnection.Close();
+                Debug.WriteLine("Categoria Registrada");
+            }
+            catch (Exception ea)
+            {
+                Debug.WriteLine($"Error: {ea.Message}");
+            }
+
         }
     }
 }

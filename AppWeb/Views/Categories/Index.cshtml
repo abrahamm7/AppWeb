@@ -6,17 +6,16 @@
     <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.css">
 </head>
 <h2>Categorias</h2>
+
+    <input type="text" id="lastnamebox" name="categorytext" class="form-control mb-4" placeholder="New category">
+    <button class="btn btn-info btn-block my-4" value="addcategory" id="signupbtn" name="categorybutton" type="submit">Add</button>
+
 <div>
     @foreach (var item in Model)
      {
         if (item == null)
         {
-            <table class="table">
-                <thead class="black white-text">
-                    <tr>
-                        <th scope="col">Categorias</th>
-                    </tr>
-                </thead>
+            <table class="table">                
                 <tbody>
                     <tr>
                         <td>No Elements</td>
@@ -26,12 +25,7 @@
         }
         else
         {
-            <table class="table">
-                <thead class="black white-text">
-                    <tr>
-                        <th scope="col">Categorias</th>
-                    </tr>
-                </thead>
+            <table class="table">              
                 <tbody>
                     <tr>
                         <td>@item.categorie</td>
