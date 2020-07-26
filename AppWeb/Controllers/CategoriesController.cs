@@ -15,7 +15,8 @@ namespace AppWeb.Controllers
         // GET: Categories
         public ActionResult Index()
         {
-            return View();
+            var x = GetCategories();
+            return View(x);
         }
         
         public List<Categorie> GetCategories()
