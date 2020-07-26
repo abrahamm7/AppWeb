@@ -7,15 +7,21 @@
 </head>
 <h2>Categorias</h2>
 
-    <input type="text" id="lastnamebox" name="categorytext" class="form-control mb-4" placeholder="New category">
-    <button class="btn btn-info btn-block my-4" value="addcategory" id="categorybtn" name="categorybutton">Add</button>
+<form class="text-center border border-light p-5">
 
+    <p class="h4 mb-4">New category</p>
+
+ 
+    <input type="text" id="userbox" name="categorytxt" class="form-control mb-4" placeholder="Category">
+
+    <button class="btn btn-info btn-block my-4" value="Add" id="addbtn" name="AddCategory" type="submit">Add</button>
+</form>
 <div>
     @foreach (var item in Model)
-     {
+    {
         if (item == null)
         {
-            <table class="table">                
+            <table class="table">
                 <tbody>
                     <tr>
                         <td>No Elements</td>
@@ -25,7 +31,7 @@
         }
         else
         {
-            <table class="table">              
+            <table class="table">
                 <tbody>
                     <tr>
                         <td>@item.categorie</td>

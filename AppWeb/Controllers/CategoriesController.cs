@@ -12,17 +12,18 @@ namespace AppWeb.Controllers
 {
     public class CategoriesController : Controller
     {
+       
+        Categorie categorie = new Categorie();
         // GET: Categories
         public ActionResult Index()
         {
             var x = GetCategories();
-            Categorie categorie = new Categorie();
             try
             {
-                string btnclick = Request["categorybutton"];
-                if (btnclick == "addcategory")
+                string btnclick = Request["AddCategory"];
+                if (btnclick == "Add")
                 {
-                    categorie.categorie = Request["categorytext"];
+                    categorie.categorie = Request["categorytxt"];
                     InsertCategorie(categorie);
                     return View(x);
                 }
