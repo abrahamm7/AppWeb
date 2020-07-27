@@ -84,9 +84,18 @@ namespace AppWeb.Controllers
 
         }
     
-        public ActionResult EditUser()
+        //Go to view for edit user//
+        public ActionResult EditUser(int? iduser)
         {
-            return View();
+            if (iduser != null)
+            {
+                var x = GetUser().Find(elem => elem.iduser == iduser);
+                return View(x);
+            }
+            else
+            {
+                return RedirectToAction("Index", "AllUsers");
+            }
         }
 
         //Delete Users//
@@ -115,5 +124,40 @@ namespace AppWeb.Controllers
             }
             return RedirectToAction("Index", "AllUsers");           
         }
+    
+        [HttpPost]
+        public ActionResult EditUser(User model)
+        {
+            string cs = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+            try
+            {
+                SqlConnection sqlConnection = new SqlConnection(cs);
+                using (SqlCommand command = new SqlCommand("UpdateUser", sqlConnection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.Add("@iduser", SqlDbType.Int);
+                    command.Parameters["@iduser"].Value = model.iduser;
+                    command.Parameters.Add("@name", SqlDbType.VarChar);
+                    command.Parameters["@name"].Value = model.name;
+                    command.Parameters.Add("@lastname", SqlDbType.VarChar);
+                    command.Parameters["@lastname"].Value = model.lastname;
+                    command.Parameters.Add("@pass", SqlDbType.Int);
+                    command.Parameters["@pass"].Value = model.password;
+                    command.Parameters.Add("@username", SqlDbType.VarChar);
+                    command.Parameters["@username"].Value = model.username;
+                    sqlConnection.Open();
+                    command.ExecuteNonQuery();
+                }
+                sqlConnection.Close();
+                Debug.WriteLine("Usuario editado");
+
+            }
+            catch (Exception ea)
+            {
+                Debug.WriteLine($"Error: {ea.Message}");
+            }
+            return RedirectToAction("Index", "AllUsers");
+        }
+    
     }
 }

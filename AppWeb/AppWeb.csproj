@@ -142,6 +142,7 @@
     <Content Include="Views\Categories\EditCategory.cshtml" />
     <Content Include="Views\Product\NewProduct.cshtml" />
     <Content Include="Views\AllUsers\Index.cshtml" />
+    <Content Include="Views\AllUsers\EditUser.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
