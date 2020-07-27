@@ -29,12 +29,6 @@ namespace AppWeb.Controllers
                     InsertCategory(categorie);
                     return View(x);
                 }
-
-                //if (btnclick == "Delete")
-                //{                    
-                //    DeleteCategory(categorie);
-                //    return View(x);
-                //}
             }
             catch (Exception ex)
             {
@@ -107,8 +101,7 @@ namespace AppWeb.Controllers
             catch (Exception ea)
             {
                 Debug.WriteLine($"Error: {ea.Message}");
-            }
-
+            }            
         }
     
         [HttpGet]
@@ -137,11 +130,36 @@ namespace AppWeb.Controllers
             return RedirectToAction("Index","Categories");
         }
     
-        [HttpGet]
+        
         public ActionResult EditCategory(int? id)
         {
-            return View(id);
+            if (id != null)
+            {
+                var x = GetCategories().Find(elem => elem.idcategorie == id);
+                return View(x);               
+            }
+            else
+            {
+                return RedirectToAction("Index", "Categories");
+            }           
         }
-       
+
+        [HttpPost]
+        public ActionResult EditCategory(Categorie categorie)
+        {
+
+            //return RedirectToAction()
+
+            //if (id != null)
+            //{
+            //    var x = GetCategories().Find(elem => elem.idcategorie == id);
+            //    return View(x);
+            //}
+            //else
+            //{
+            return RedirectToAction("Index", "Categories");
+            
+        }
+
     }
 }
