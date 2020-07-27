@@ -1,0 +1,36 @@
+﻿@model AppWeb.Models.Categorie
+@{
+    ViewBag.Title = "EditCategory";
+}
+
+<h2>Edit Category</h2>
+@using (Html.BeginForm())
+{
+
+  
+<fieldset>
+    <div class="editor-label">
+
+        @Html.LabelFor(model => model.idcategorie)
+
+    </div>
+    <div class="editor-field">
+
+        @Html.EditorFor(model => model.idcategorie)
+    </div>
+    <div class="editor-label">
+
+        @Html.LabelFor(model => model.categorie)
+
+    </div>
+    <div class="editor-field">
+
+        @Html.EditorFor(model => model.categorie)
+    </div>
+    <p>
+        <input type="submit" value="Save" />
+    </p>
+
+</fieldset>
+
+}

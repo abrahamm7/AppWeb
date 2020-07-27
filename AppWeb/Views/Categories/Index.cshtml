@@ -34,7 +34,11 @@
                 <tbody>
                     <tr>
                         <td>
-                            @item.categorie   
+                            @item.categorie                           
+                        </td>
+                        <td>                         
+                             @Html.ActionLink("Edit", "EditCategory", new { id = item.idcategorie })  
+                             @Html.ActionLink("Delete", "DeleteCategory", new { id = item.categorie })  
                         </td>
                     </tr>                  
                 </tbody>

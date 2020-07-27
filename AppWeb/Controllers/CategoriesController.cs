@@ -6,6 +6,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Web;
 using System.Web.Mvc;
 
@@ -29,11 +30,11 @@ namespace AppWeb.Controllers
                     return View(x);
                 }
 
-                if (btnclick == "Delete")
-                {                    
-                    DeleteCategory(categorie);
-                    return View(x);
-                }
+                //if (btnclick == "Delete")
+                //{                    
+                //    DeleteCategory(categorie);
+                //    return View(x);
+                //}
             }
             catch (Exception ex)
             {
@@ -110,7 +111,8 @@ namespace AppWeb.Controllers
 
         }
     
-        public void DeleteCategory(Categorie categorie)
+        [HttpGet]
+        public ActionResult DeleteCategory(string id)
         {
             string cs = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
             try
@@ -119,8 +121,8 @@ namespace AppWeb.Controllers
                 using (SqlCommand command = new SqlCommand("DeleteCategory", sqlConnection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.Add("@idcategory", SqlDbType.Int);
-                    command.Parameters["@idcategory"].Value = categorie.idcategorie;
+                    command.Parameters.Add("@Category", SqlDbType.VarChar);
+                    command.Parameters["@Category"].Value = id;
                     sqlConnection.Open();
                     command.ExecuteNonQuery();
                 }
@@ -131,7 +133,15 @@ namespace AppWeb.Controllers
             catch (Exception ea)
             {
                 Debug.WriteLine($"Error: {ea.Message}");
-            }            
+            }
+            return RedirectToAction("Index","Categories");
         }
+    
+        [HttpGet]
+        public ActionResult EditCategory(int? id)
+        {
+            return View(id);
+        }
+       
     }
 }
