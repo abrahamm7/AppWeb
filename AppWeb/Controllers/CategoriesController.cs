@@ -36,7 +36,7 @@ namespace AppWeb.Controllers
             }
             return View(x);
         }
-        
+        //Get All categories from the DB//
         public List<Categorie> GetCategories()
         {
             try
@@ -81,6 +81,7 @@ namespace AppWeb.Controllers
             }
         }
 
+        //Insert new Category//
         public void InsertCategory(Categorie categorie)
         {
             string cs = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
@@ -104,6 +105,7 @@ namespace AppWeb.Controllers
             }            
         }
     
+        //Delete Category//
         [HttpGet]
         public ActionResult DeleteCategory(string id)
         {
@@ -129,7 +131,8 @@ namespace AppWeb.Controllers
             }
             return RedirectToAction("Index","Categories");
         }
-        
+
+        //Redirect to edit the category//
         public ActionResult EditCategory(int? id)
         {
             if (id != null)
@@ -143,25 +146,34 @@ namespace AppWeb.Controllers
             }           
         }
 
+        //Update catgory method//
         [HttpPost]
         public ActionResult EditCategory(Categorie model)
         {
             string cs = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
             try
             {
-                SqlConnection sqlConnection = new SqlConnection(cs);
-                using (SqlCommand command = new SqlCommand("UpdateCategory", sqlConnection))
+                var x = GetCategories().Find(elem => elem.idcategorie == model.idcategorie && elem.categorie == model.categorie);
+                if (x != null)
                 {
-                    command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.Add("@idcate", SqlDbType.Int);
-                    command.Parameters["@idcate"].Value = model.idcategorie;
-                    command.Parameters.Add("@categoria", SqlDbType.VarChar);
-                    command.Parameters["@categoria"].Value = model.categorie;
-                    sqlConnection.Open();
-                    command.ExecuteNonQuery();
+                    SqlConnection sqlConnection = new SqlConnection(cs);
+                    using (SqlCommand command = new SqlCommand("UpdateCategory", sqlConnection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.Add("@idcate", SqlDbType.Int);
+                        command.Parameters["@idcate"].Value = model.idcategorie;
+                        command.Parameters.Add("@categoria", SqlDbType.VarChar);
+                        command.Parameters["@categoria"].Value = model.categorie;
+                        sqlConnection.Open();
+                        command.ExecuteNonQuery();
+                    }
+                    sqlConnection.Close();
+                    Debug.WriteLine("Categoria editada");
                 }
-                sqlConnection.Close();
-                Debug.WriteLine("Categoria editada");
+                else
+                {
+                    return RedirectToAction("EditCategory", "Categories");
+                }               
 
             }
             catch (Exception ea)
