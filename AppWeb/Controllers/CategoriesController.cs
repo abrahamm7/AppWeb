@@ -129,7 +129,6 @@ namespace AppWeb.Controllers
             }
             return RedirectToAction("Index","Categories");
         }
-    
         
         public ActionResult EditCategory(int? id)
         {
@@ -145,18 +144,30 @@ namespace AppWeb.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditCategory(Categorie categorie)
+        public ActionResult EditCategory(Categorie model)
         {
+            string cs = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+            try
+            {
+                SqlConnection sqlConnection = new SqlConnection(cs);
+                using (SqlCommand command = new SqlCommand("UpdateCategory", sqlConnection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.Add("@idcate", SqlDbType.Int);
+                    command.Parameters["@idcate"].Value = model.idcategorie;
+                    command.Parameters.Add("@categoria", SqlDbType.VarChar);
+                    command.Parameters["@categoria"].Value = model.categorie;
+                    sqlConnection.Open();
+                    command.ExecuteNonQuery();
+                }
+                sqlConnection.Close();
+                Debug.WriteLine("Categoria editada");
 
-            //return RedirectToAction()
-
-            //if (id != null)
-            //{
-            //    var x = GetCategories().Find(elem => elem.idcategorie == id);
-            //    return View(x);
-            //}
-            //else
-            //{
+            }
+            catch (Exception ea)
+            {
+                Debug.WriteLine($"Error: {ea.Message}");
+            }
             return RedirectToAction("Index", "Categories");
             
         }
