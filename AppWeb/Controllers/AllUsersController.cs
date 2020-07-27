@@ -26,7 +26,7 @@ namespace AppWeb.Controllers
                 return View();
             }
         }
-
+        //Get all users from db//
         public List<User> GetUser()
         {
             try
@@ -125,6 +125,7 @@ namespace AppWeb.Controllers
             return RedirectToAction("Index", "AllUsers");           
         }
     
+        //Edit user//
         [HttpPost]
         public ActionResult EditUser(User model)
         {
