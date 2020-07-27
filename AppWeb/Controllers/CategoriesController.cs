@@ -22,7 +22,6 @@ namespace AppWeb.Controllers
             try
             {
                 string btnclick = Request["btncategory"];
-                //string deleteclick = Request["DeleteCategory"];
                 if (btnclick == "Add")
                 {
                     categorie.categorie = Request["categorytxt"];
@@ -125,13 +124,14 @@ namespace AppWeb.Controllers
                     sqlConnection.Open();
                     command.ExecuteNonQuery();
                 }
-                sqlConnection.Close();
+                sqlConnection.Close();                    
                 Debug.WriteLine("Categoria eliminada");
+              
             }
             catch (Exception ea)
             {
                 Debug.WriteLine($"Error: {ea.Message}");
-            }
+            }            
         }
     }
 }
