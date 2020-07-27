@@ -39,8 +39,8 @@
                         @item.username
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "EditCategory", new { id = item.iduser })
-                        @Html.ActionLink("Delete", "DeleteCategory", new { id = item.iduser })
+                        @Html.ActionLink("Edit", "EditUser", new { iduser = item.iduser })
+                        @Html.ActionLink("Delete", "DeleteUser", new { iduser = item.iduser })
                     </td>
                 </tr>
             </table>

@@ -153,7 +153,7 @@ namespace AppWeb.Controllers
             string cs = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
             try
             {
-                var x = GetCategories().Find(elem => elem.idcategorie == model.idcategorie && elem.categorie == model.categorie);
+                var x = GetCategories().Find(elem => elem.idcategorie == model.idcategorie);
                 if (x != null)
                 {
                     SqlConnection sqlConnection = new SqlConnection(cs);

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
@@ -81,6 +82,38 @@ namespace AppWeb.Controllers
                 return null;
             }
 
+        }
+    
+        public ActionResult EditUser()
+        {
+            return View();
+        }
+
+        //Delete Users//
+        [HttpGet]
+        public ActionResult DeleteUser(int iduser)
+        {
+            string cs = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+            try
+            {
+                SqlConnection sqlConnection = new SqlConnection(cs);
+                using (SqlCommand command = new SqlCommand("DeleteUser", sqlConnection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.Add("@iduser", SqlDbType.Int);
+                    command.Parameters["@iduser"].Value = iduser;
+                    sqlConnection.Open();
+                    command.ExecuteNonQuery();
+                }
+                sqlConnection.Close();
+                Debug.WriteLine("Usuario eliminado");
+
+            }
+            catch (Exception ea)
+            {
+                Debug.WriteLine($"Error: {ea.Message}");
+            }
+            return RedirectToAction("Index", "AllUsers");           
         }
     }
 }
