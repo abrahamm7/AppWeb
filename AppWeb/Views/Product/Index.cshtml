@@ -7,17 +7,7 @@
 <head>
     <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.css">
 </head>
-
-<form class="text-center border border-light p-5">
-
-    <p class="h4 mb-4">New Product</p>
-
-    <input type="text" id="userbox" name="producttxt" class="form-control mb-4" placeholder="Product">
-
-    <input type="text" id="userbox" name="producttxt" class="form-control mb-4" placeholder="Category">
-
-    <button class="btn btn-primary btn-block" value="Add" id="addbtn" name="btncategory" type="submit">Add</button>
-</form>
+@Html.Action("Create a new product","")
 <div>
     @foreach (var item in Model)
     {

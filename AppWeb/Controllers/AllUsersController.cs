@@ -10,26 +10,33 @@ using System.Web.Mvc;
 
 namespace AppWeb.Controllers
 {
-    public class ProductController : Controller
+    public class AllUsersController : Controller
     {
-        // GET: Product
+        // GET: AllUsers
         public ActionResult Index()
         {
-            var x = GetProducts();
-            return View(x);
+            var x = GetUser();
+            if (x.Count != 0)
+            {
+                return View(x);
+            }
+            else
+            {
+                return View();
+            }
         }
 
-        public List<Product> GetProducts()
+        public List<User> GetUser()
         {
             try
             {
-                List<Product> products = new List<Product>();
+                List<User> listado = new List<User>();
                 string cs = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
                 using (SqlConnection con = new SqlConnection(cs))
                 {
                     con.Open();
 
-                    using (SqlCommand command = new SqlCommand("GetAllProducts", con))
+                    using (SqlCommand command = new SqlCommand("GetAllUser", con))
                     {
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
@@ -37,39 +44,35 @@ namespace AppWeb.Controllers
                             {
                                 while (reader.Read())
                                 {
-                                    Product product = new Product();
+                                    User users = new User();
 
                                     if (reader[0] != System.DBNull.Value)
                                     {
-                                        product.IDproduct = Convert.ToInt32(reader[0]);
+                                        users.iduser = Convert.ToInt32(reader[0]);
                                     }
                                     if (reader[1] != System.DBNull.Value)
                                     {
-                                        product.IDCategory = Convert.ToInt32(reader[1]);
+                                        users.username = reader[1].ToString();
                                     }
                                     if (reader[2] != System.DBNull.Value)
                                     {
-                                        product.Name = reader[2].ToString();
+                                        users.name = reader[2].ToString();
                                     }
                                     if (reader[3] != System.DBNull.Value)
                                     {
-                                        product.Price = reader[3].ToString();
+                                        users.lastname = reader[3].ToString();
                                     }
                                     if (reader[4] != System.DBNull.Value)
                                     {
-                                        product.IDCategoryC = Convert.ToInt32(reader[4]);
+                                        users.password = reader[4].ToString();
                                     }
-                                    if (reader[5] != System.DBNull.Value)
-                                    {
-                                        product.Category = reader[5].ToString();
-                                    }
-                                    products.Add(product);
+                                    listado.Add(users);
                                 }
                             }
                         }
                     }
                     con.Close();
-                    return products;
+                    return listado;
                 }
             }
             catch (Exception ex)
@@ -77,14 +80,7 @@ namespace AppWeb.Controllers
                 Debug.WriteLine($"Error: {ex.Message}");
                 return null;
             }
-        }
-    
-        public ActionResult NewProduct()
-        {
-            return View();
-        }
 
-        
-    
+        }
     }
 }

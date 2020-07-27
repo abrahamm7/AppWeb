@@ -1,0 +1,52 @@
+﻿@model List<AppWeb.Models.User>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Users</h2>
+<head>
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.css">
+</head>
+
+<div>
+    @foreach (var item in Model)
+    {
+        if (item == null)
+        {
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td>No Elements</td>
+                    </tr>
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <table class="table table-bordered">
+                <tr>
+                    <th>
+                        Categories
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        @item.name
+                        @item.lastname
+                        @item.username
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "EditCategory", new { id = item.iduser })
+                        @Html.ActionLink("Delete", "DeleteCategory", new { id = item.iduser })
+                    </td>
+                </tr>
+            </table>
+        }
+
+    }
+</div>
+
+
