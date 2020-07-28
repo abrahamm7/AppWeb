@@ -1,7 +1,7 @@
 ﻿@model List<AppWeb.Models.Categorie>
 
 @{
-    ViewBag.Title = "NewProduct";
+    ViewBag.Title = "Agregar Producto";
 }
 
 <h2>New Product</h2>
@@ -13,6 +13,12 @@
 
     <input type="text" id="pricebox" name="pricetxt" class="form-control mb-4" placeholder="Price">
 
+    <div class="row">
+        <div class="form-group">
+            @Html.DropDownList("category", ViewBag.categ as List<SelectListItem>,
+                               "Select Category", new { @class = "form-control" })
+        </div>
+    </div>
 
-    <button class="btn btn-info btn-block my-4" value="SignUp" id="signupbtn" name="signupuser" type="submit">Create</button>
+    <button class="btn btn-info btn-block my-4" value="Create" id="signupbtn" name="addproduct" type="submit">Create</button>
 </form>

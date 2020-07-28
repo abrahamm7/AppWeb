@@ -13,11 +13,11 @@ namespace AppWeb.Controllers
 {
     public class ProductController : Controller
     {
+        private List<SelectListItem> selectListItems;
         // GET: Product
         public ActionResult Index()
         {
-            var x = GetProducts();
-            
+            var x = GetProducts();           
             return View(x);
         }
         //Get all products from db//
@@ -125,10 +125,42 @@ namespace AppWeb.Controllers
             }
         }
         //Insert product in db//
+        public void InsertProduct(Product product)
+        {
+
+        }    
         public ActionResult NewProduct()
         {
-            var x = GetCategories();
-            ViewBag.categories = x;
+            Product product = new Product();
+            var xy = GetCategories();
+            var obj = xy;
+            selectListItems = new List<SelectListItem>();
+            foreach (var item in obj)
+            {
+                selectListItems.Add(new SelectListItem
+                {
+                    Text = item.categorie,
+                    Value = item.idcategorie.ToString()
+                });
+            }
+            ViewBag.categ = selectListItems;
+            try
+            {
+                string btnclick = Request["addproduct"];
+                if (btnclick == "Create")
+                {                  
+                    product.Name  = Request["nametxt"];
+                    product.Price = Request["pricetxt"];
+                    var p = selectListItems.Select(elem => elem.Value).ToList();
+                    product.IDCategory = Convert.ToInt32(p.FirstOrDefault());
+                    //lista.where(o => o.id == value).FirstOrDefault().idCategorie;)
+                    InsertProduct(product);                    
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error en: {ex.Message}");
+            }
             return View();
         }
         //Delete product in db//
