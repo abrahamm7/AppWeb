@@ -20,7 +20,7 @@ namespace AppWeb.Controllers
             
             return View(x);
         }
-
+        //Get all products from db//
         public List<Product> GetProducts()
         {
             try
@@ -80,7 +80,7 @@ namespace AppWeb.Controllers
                 return null;
             }
         }
-
+        //Get all categories from db//
         public List<Categorie> GetCategories()
         {
             try
@@ -124,14 +124,14 @@ namespace AppWeb.Controllers
                 return null;
             }
         }
-        
+        //Insert product in db//
         public ActionResult NewProduct()
         {
             var x = GetCategories();
             ViewBag.categories = x;
             return View();
         }
-
+        //Delete product in db//
         [HttpGet]
         public ActionResult DeleteProduct(int id)
         {
@@ -157,7 +157,7 @@ namespace AppWeb.Controllers
             }
             return RedirectToAction("Index", "Product");
         }
-
+        //Edit product//
         public ActionResult EditProduct(int? id)
         {
             if (id != null)
@@ -170,7 +170,7 @@ namespace AppWeb.Controllers
                 return RedirectToAction("Index", "Product");
             }
         }
-        
+        //Edit product in db//
         [HttpPost]
         public ActionResult EditProduct(Product model)
         {
