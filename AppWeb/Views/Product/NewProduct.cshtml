@@ -20,5 +20,14 @@
         </div>
     </div>
 
-    <button class="btn btn-info btn-block my-4" value="Create" id="signupbtn" name="addproduct" type="submit">Create</button>
+    <button class="btn btn-info btn-block my-4" onclick="btnclick(s,e)" value="Create" id="signupbtn" name="addproduct" type="submit">Create</button>
 </form>
+<script type="text/javascript">
+    function btnclick(s, e) {
+        var x = document.getElementById("namebox").value;
+        var xy = document.getElementById("pricebox").value;
+        if (x == null || x.trim() === '' || xy == null || xy.trim() === '' ) {
+            alert("Campo vacio");
+        }
+    }
+</script>
