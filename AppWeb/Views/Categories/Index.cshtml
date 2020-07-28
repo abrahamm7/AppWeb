@@ -2,18 +2,22 @@
 @{
     ViewBag.Title = "Index";
 }
-    <head>
-        <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.css">
-    </head>
+<head>
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.css">
+</head>
 <h2>Categorias</h2>
 
 <form class="text-center border border-light p-5">
 
     <p class="h4 mb-4">New category</p>
-    
-    <input type="text" id="userbox" name="categorytxt" class="form-control mb-4" placeholder="Category">
 
-    <button class="btn btn-primary btn-block" value="Add" id="addbtn" name="btncategory" type="submit">Add</button>
+    <input type="text" id="catetxt" name="categorytxt" class="form-control mb-4" placeholder="Category">
+
+    <br />
+
+    <button class="btn btn-primary btn-block" onclick="btnclick(s,e)" value="Add" id="addbtn" name="btncategory" type="submit">Add</button>
+
+    <br />
 </form>
 <div>
     @foreach (var item in Model)
@@ -30,7 +34,7 @@
         }
         else
         {
-            <table class="table table-bordered">  
+            <table class="table table-bordered">
                 <tr>
                     <th>
                         Categories
@@ -39,20 +43,25 @@
                         Actions
                     </th>
                 </tr>
-                    <tr>
-                        <td>
-                            @item.categorie                           
-                        </td>
-                        <td>                         
-                             @Html.ActionLink("Edit", "EditCategory", new { id = item.idcategorie })  
-                             @Html.ActionLink("Delete", "DeleteCategory", new { id = item.categorie })  
-                        </td>
-                    </tr>                 
+                <tr>
+                    <td>
+                        @item.categorie
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "EditCategory", new { id = item.idcategorie })
+                        @Html.ActionLink("Delete", "DeleteCategory", new { id = item.categorie })
+                    </td>
+                </tr>
             </table>
         }
 
-     }
-
-
+    }
 </div>
-
+<script type="text/javascript">
+    function btnclick(s, e) {
+        var x = document.getElementById("catetxt").value;
+        if (x === null || x.match(/^ *$/) !== null) {
+            alert("Campo vacio");
+        }
+    }
+</script>
