@@ -10,17 +10,30 @@
 
     <fieldset>
         <div class="editor-field">
+
+        @Html.LabelFor(model => model.IDproduct)
+    </div>
+        <div class="editor-field">
             @Html.EditorFor(model => model.IDproduct, new
        { disabled = "disabled", @readonly = "readonly" })
         </div>
+        <div class="editor-field">
+
+        @Html.LabelFor(model => model.IDCategory)
+    </div>
           <div class="editor-field">
             @Html.EditorFor(model => model.IDCategory, new
        { disabled = "disabled", @readonly = "readonly" })
         </div>
         <div class="editor-field">
+        @Html.LabelFor(model => model.Name)
+    </div>
+        <div class="editor-field">
             @Html.EditorFor(model => model.Name)
         </div>
-
+        <div class="editor-field">
+        @Html.LabelFor(model => model.Price)
+        </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.Price)
         </div>

@@ -98,6 +98,18 @@ namespace AppWeb.Controllers
             }
         }
 
+        public ActionResult ViewUser(int? iduser)
+        {
+            if (iduser != null)
+            {
+                var x = GetUser().Find(elem => elem.iduser == iduser);
+                return View(x);
+            }
+            else
+            {
+                return RedirectToAction("Index", "AllUsers");
+            }
+        }
         //Delete Users//
         [HttpGet]
         public ActionResult DeleteUser(int iduser)
