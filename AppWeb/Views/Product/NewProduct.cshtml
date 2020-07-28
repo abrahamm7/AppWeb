@@ -1,4 +1,5 @@
-﻿
+﻿@model List<AppWeb.Models.Categorie>
+
 @{
     ViewBag.Title = "NewProduct";
 }
@@ -7,15 +8,10 @@
 
 <form class="text-center border border-light p-5">
 
-
-
     <input type="text" id="namebox" name="nametxt" class="form-control mb-4" placeholder="Name">
 
 
-    <input type="text" id="lastnamebox" name="lasttxt" class="form-control mb-4" placeholder="Price">
-
-
-    <input type="text" id="userbox" name="usertxt" class="form-control mb-4" placeholder="Category">
+    <input type="text" id="pricebox" name="pricetxt" class="form-control mb-4" placeholder="Price">
 
 
     <button class="btn btn-info btn-block my-4" value="SignUp" id="signupbtn" name="signupuser" type="submit">Create</button>

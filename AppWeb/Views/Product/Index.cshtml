@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.css">
 </head>
 
+@Html.ActionLink("Create", "NewProduct")
 <div>
     @foreach (var item in Model)
     {
@@ -33,7 +34,11 @@
                             @item.Price
                         </td>
                         <td>
-                            @item.Category  
+                            @item.Category
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "EditProduct", new { id = item.IDproduct })
+                            @Html.ActionLink("Delete", "DeleteProduct", new { id = item.IDproduct })
                         </td>
                     </tr>
                 </tbody>
