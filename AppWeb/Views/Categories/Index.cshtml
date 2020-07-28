@@ -18,42 +18,33 @@
     <br />
 </form>
 <div>
-    @foreach (var item in Model)
-    {
-        if (item == null)
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                Categories
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
+        @foreach (var item in Model)
         {
-            <table class="table">
-                <tbody>
-                    <tr>
-                        <td>No Elements</td>
-                    </tr>
-                </tbody>
-            </table>
-        }
-        else
-        {
-            <table class="table table-bordered">
-                <tr>
-                    <th>
-                        Categories
-                    </th>
-                    <th>
-                        Actions
-                    </th>
-                </tr>
-                <tr>
-                    <td>
-                        @item.categorie
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "EditCategory", new { id = item.idcategorie })
-                        @Html.ActionLink("Delete", "DeleteCategory", new { id = item.categorie })
-                    </td>
-                </tr>
-            </table>
-        }
 
-    }
+            <tr>
+                <td>
+                    @item.categorie
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditCategory", new { id = item.idcategorie })
+                    @Html.ActionLink("Delete", "DeleteCategory", new { id = item.categorie })
+                </td>
+            </tr>
+
+
+        }
+    </table>
+
+
 </div>
 <script type="text/javascript">
     function btnclick(s, e) {

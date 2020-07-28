@@ -36,6 +36,7 @@ namespace AppWeb.Controllers
             return View();
         }
 
+        //Add User to db//
         public void InsertUser(User user)
         {
             string cs = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;

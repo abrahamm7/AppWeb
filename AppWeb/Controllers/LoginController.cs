@@ -38,7 +38,8 @@ namespace AppWeb.Controllers
             return View();
             
         }
-
+        
+        //Get all users from db//
         public List<User> GetUser()
         {
             try

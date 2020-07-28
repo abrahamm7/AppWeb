@@ -9,45 +9,32 @@
 </head>
 
 <div>
-    @foreach (var item in Model)
-    {
-        if (item == null)
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                User
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
+        @foreach (var item in Model)
         {
-            <table class="table">
-                <tbody>
-                    <tr>
-                        <td>No Elements</td>
-                    </tr>
-                </tbody>
-            </table>
+            <tr>
+                <td>
+                    @item.name
+                    @item.lastname
+                    @item.username
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditUser", new { iduser = item.iduser })
+                    @Html.ActionLink("Delete", "DeleteUser", new { iduser = item.iduser })
+                    @Html.ActionLink("View", "ViewUser", new { iduser = item.iduser })
+                </td>
+            </tr>
         }
-        else
-        {
-            <table class="table table-bordered">
-                <tr>
-                    <th>
-                        User
-                    </th>
-                    <th>
-                        Actions
-                    </th>
-                </tr>
-                <tr>
-                    <td>
-                        @item.name
-                        @item.lastname
-                        @item.username
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "EditUser", new { iduser = item.iduser })
-                        @Html.ActionLink("Delete", "DeleteUser", new { iduser = item.iduser })
-                        @Html.ActionLink("View", "ViewUser", new { iduser = item.iduser })
-                    </td>
-                </tr>
-            </table>
-        }
+    </table>
 
-    }
-</div>
+    </div>
 
 

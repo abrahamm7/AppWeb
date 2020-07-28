@@ -10,43 +10,46 @@
 
 @Html.ActionLink("Create", "NewProduct")
 <div>
-    @foreach (var item in Model)
-    {
-        if (item == null)
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                Products
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Category
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
+        @foreach (var item in Model)
         {
-            <table class="table">
-                <tbody>
-                    <tr>
-                        <td>No Elements</td>
-                    </tr>
-                </tbody>
-            </table>
-        }
-        else
-        {
-            <table class="table">
-                <tbody>
-                    <tr>
-                        <td>
-                            @item.Name
-                        </td>
-                        <td>
-                            @item.Price
-                        </td>
-                        <td>
-                            @item.Category
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "EditProduct", new { id = item.IDproduct })
-                            @Html.ActionLink("Delete", "DeleteProduct", new { id = item.IDproduct })
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+
+            <tbody>
+                <tr>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        @item.Price
+                    </td>
+                    <td>
+                        @item.Category
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "EditProduct", new { id = item.IDproduct })
+                        @Html.ActionLink("Delete", "DeleteProduct", new { id = item.IDproduct })
+                    </td>
+                </tr>
+            </tbody>
+
+
         }
 
-    }
+    </table>
 
-
-</div>
+    </div>
 
