@@ -4,29 +4,31 @@
     Layout = null;
 }
 
-<h2>Register</h2>
+
 <!-- Default form login -->
 <head>
     <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.css">
 </head>
+<div class="container">
+    <div class="jumbotron text-center">
+        <h2>Register</h2>
+    </div>
+    <form class="text-center border border-light p-5">
+        <!-- Name -->
+        <input type="text" id="namebox" name="nametxt" class="form-control mb-4" placeholder="Name">
 
-<form class="text-center border border-light p-5">
+        <!-- LastName -->
+        <input type="text" id="lastnamebox" name="lasttxt" class="form-control mb-4" placeholder="LastName">
 
-    <p class="h4 mb-4">Sign Up</p>
+        <!-- User -->
+        <input type="text" id="userbox" name="usertxt" class="form-control mb-4" placeholder="User">
 
-    <!-- Name -->
-    <input type="text" id="namebox" name="nametxt" class="form-control mb-4" placeholder="Name">
+        <!-- Password -->
+        <input type="password" id="passbox" name="passtxt" class="form-control mb-4" placeholder="Password">
 
-    <!-- LastName -->
-    <input type="text" id="lastnamebox" name="lasttxt" class="form-control mb-4" placeholder="LastName">
+        <!-- Sign Up button -->
+        <button class="btn btn-info btn-block my-4" value="SignUp" id="signupbtn" name="signupuser" type="submit">Sign Up</button>
+    </form>
+    <!-- Default form login -->
+</div>
 
-    <!-- User -->
-    <input type="text" id="userbox" name="usertxt" class="form-control mb-4" placeholder="User">
-
-    <!-- Password -->
-    <input type="password" id="passbox" name="passtxt" class="form-control mb-4" placeholder="Password">
-
-    <!-- Sign Up button -->
-    <button class="btn btn-info btn-block my-4" value="SignUp" id="signupbtn" name="signupuser" type="submit">Sign Up</button>
-</form>
-<!-- Default form login -->
