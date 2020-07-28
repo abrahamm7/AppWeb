@@ -20,6 +20,7 @@ namespace AppWeb.Controllers
             var x = GetProducts();           
             return View(x);
         }
+        
         //Get all products from db//
         public List<Product> GetProducts()
         {
@@ -80,6 +81,7 @@ namespace AppWeb.Controllers
                 return null;
             }
         }
+       
         //Get all categories from db//
         public List<Categorie> GetCategories()
         {
@@ -124,10 +126,35 @@ namespace AppWeb.Controllers
                 return null;
             }
         }
+       
         //Insert product in db//
         public void InsertProduct(Product product)
         {
-
+            string cs = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+            try
+            {
+                SqlConnection sqlConnection = new SqlConnection(cs);
+                using (SqlCommand command = new SqlCommand("InsertProduct", sqlConnection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.Add("@name", SqlDbType.VarChar);
+                    command.Parameters["@name"].Value = product.Name;
+                    command.Parameters.Add("@price", SqlDbType.Int);
+                    command.Parameters["@price"].Value = product.Price;
+                    command.Parameters.Add("@category", SqlDbType.Int);
+                    command.Parameters["@category"].Value = product.IDCategory;
+                    sqlConnection.Open();
+                    command.ExecuteNonQuery();
+                }
+                sqlConnection.Close();
+                Debug.WriteLine("Producto agregado");
+                RedirectToAction("Index", "Product");
+            }
+            catch (Exception ea)
+            {
+                Debug.WriteLine($"Error: {ea.Message}");
+            }
+            
         }    
         public ActionResult NewProduct()
         {
@@ -153,7 +180,6 @@ namespace AppWeb.Controllers
                     product.Price = Request["pricetxt"];
                     var p = selectListItems.Select(elem => elem.Value).ToList();
                     product.IDCategory = Convert.ToInt32(p.FirstOrDefault());
-                    //lista.where(o => o.id == value).FirstOrDefault().idCategorie;)
                     InsertProduct(product);                    
                 }
             }
@@ -189,6 +215,7 @@ namespace AppWeb.Controllers
             }
             return RedirectToAction("Index", "Product");
         }
+        
         //Edit product//
         public ActionResult EditProduct(int? id)
         {
@@ -202,6 +229,7 @@ namespace AppWeb.Controllers
                 return RedirectToAction("Index", "Product");
             }
         }
+        
         //Edit product in db//
         [HttpPost]
         public ActionResult EditProduct(Product model)
