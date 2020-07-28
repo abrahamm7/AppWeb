@@ -1,6 +1,6 @@
 ﻿@model List<AppWeb.Models.Categorie>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Category";
 }
 <head>
     <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.css">
@@ -9,13 +9,11 @@
 
 <form class="text-center border border-light p-5">
 
-    <p class="h4 mb-4">New category</p>
-
-    <input type="text" id="catetxt" name="categorytxt" class="form-control mb-4" placeholder="Category">
+    <input type="text" id="catetxt" name="categorytxt" class="form-control mb-4" placeholder="New category">
 
     <br />
 
-    <button class="btn btn-primary btn-block" onclick="btnclick(s,e)" value="Add" id="addbtn" name="btncategory" type="submit">Add</button>
+    <button class="btn btn-primary btn-block" onclick="btnclick(s,e)" value="Add" id="addbtn" name="btncategory">Add</button>
 
     <br />
 </form>
@@ -60,7 +58,7 @@
 <script type="text/javascript">
     function btnclick(s, e) {
         var x = document.getElementById("catetxt").value;
-        if (x === null || x.match(/^ *$/) !== null) {
+        if (x == null || x.trim() === '') {
             alert("Campo vacio");
         }
     }

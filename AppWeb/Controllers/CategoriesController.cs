@@ -25,7 +25,11 @@ namespace AppWeb.Controllers
                 string btnclick = Request["btncategory"];
                 if (btnclick == "Add")
                 {
-                    categorie.categorie = Request["categorytxt"];
+                    var text = Request["categorytxt"];
+                    if (!string.IsNullOrEmpty(text))
+                    {
+                        categorie.categorie = text;
+                    }                  
                     InsertCategory(categorie);
                     return View(x);
                 }
