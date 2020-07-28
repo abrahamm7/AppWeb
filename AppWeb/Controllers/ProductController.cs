@@ -125,7 +125,6 @@ namespace AppWeb.Controllers
             }
         }
         
-     
         public ActionResult NewProduct()
         {
             var x = GetCategories();
@@ -159,7 +158,48 @@ namespace AppWeb.Controllers
             return RedirectToAction("Index", "Product");
         }
 
+        public ActionResult EditProduct(int? id)
+        {
+            if (id != null)
+            {
+                var x = GetProducts().Find(elem => elem.IDproduct == id);
+                return View(x);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Product");
+            }
+        }
+        
+        [HttpPost]
+        public ActionResult EditProduct(Product model)
+        {
+            string cs = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+            try
+            {
+                SqlConnection sqlConnection = new SqlConnection(cs);
+                using (SqlCommand command = new SqlCommand("UpdateProduct", sqlConnection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.Add("@idproduct", SqlDbType.Int);
+                    command.Parameters["@idproduct"].Value = model.IDproduct;
+                    command.Parameters.Add("@name", SqlDbType.VarChar);
+                    command.Parameters["@name"].Value = model.Name;
+                    command.Parameters.Add("@precio", SqlDbType.Int);
+                    command.Parameters["@precio"].Value = model.Price;                
+                    sqlConnection.Open();
+                    command.ExecuteNonQuery();
+                }
+                sqlConnection.Close();
+                Debug.WriteLine("Producto editado");
 
+            }
+            catch (Exception ea)
+            {
+                Debug.WriteLine($"Error: {ea.Message}");
+            }
+            return RedirectToAction("Index", "Product");
+        }
 
     }
 }

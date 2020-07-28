@@ -1,0 +1,34 @@
+﻿@model AppWeb.Models.Product
+@{
+    ViewBag.Title = "EditProduct";
+}
+
+<h2>EditProduct</h2>
+
+@using (Html.BeginForm())
+{
+
+    <fieldset>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IDproduct, new
+       { disabled = "disabled", @readonly = "readonly" })
+        </div>
+          <div class="editor-field">
+            @Html.EditorFor(model => model.IDCategory, new
+       { disabled = "disabled", @readonly = "readonly" })
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+        </div>
+
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Price)
+        </div>
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+
+    </fieldset>
+
+}
+
