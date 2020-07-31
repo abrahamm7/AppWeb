@@ -94,5 +94,20 @@ namespace AppWeb.Services
                 }
             }
         }
+    
+        public void EditCategory(Category category) //UpdateCategory//
+        {
+            using (IDbConnection dbConnection = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ToString()))
+            {
+                try
+                {
+                    dbConnection.Execute($"UpdateCategory '{category.CategoriaId}', '{category.Categoria}'");
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                }
+            }
+        }
     }
 }

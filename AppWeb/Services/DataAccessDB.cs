@@ -14,5 +14,6 @@ namespace AppWeb.Services
         List<Category> GetAllCategories();
         void InsertCategory(Category category);
         void DeleteCategory(string category);
+        void EditCategory(Category category);
     }
 }

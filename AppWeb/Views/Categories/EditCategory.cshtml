@@ -1,4 +1,4 @@
-﻿@model AppWeb.Models.Categorie
+﻿@model AppWeb.Models.Category
 @{
     ViewBag.Title = "EditCategory";
 }
@@ -11,17 +11,17 @@
 <fieldset>
     <div class="editor-field">
 
-        @Html.EditorFor(model => model.idcategorie, new
+        @Html.EditorFor(model => model.CategoriaId, new
    { disabled = "disabled", @readonly = "readonly" })
     </div>
 
     <div class="editor-field">
 
-        @Html.LabelFor(model => model.categorie)
+        @Html.LabelFor(model => model.Categoria)
     </div>
     <div class="editor-field">
 
-        @Html.EditorFor(model => model.categorie)
+        @Html.EditorFor(model => model.Categoria)
     </div>
     <p>
         <input type="submit" value="Save" />

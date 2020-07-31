@@ -51,18 +51,18 @@ namespace AppWeb.Controllers
         }     
         //Delete Category//
         [HttpGet]
-        public ActionResult DeleteCategory(string obj)
+        public ActionResult DeleteCategory(string model)
         {
-            Data.DeleteCategory(obj);
+            Data.DeleteCategory(model);
             return RedirectToAction("Index","Categories");
         }
 
         //Redirect to edit the category//
-        public ActionResult EditCategory(int? id)
+        public ActionResult EditCategory(int? model)
         {
-            if (id != null)
+            if (model != null)
             {
-                var x = Data.GetAllCategories().Find(elem => elem.CategoriaId == id);
+                var x = Data.GetAllCategories().Find(elem => elem.CategoriaId == model);
                 return View(x);               
             }
             else
@@ -75,38 +75,8 @@ namespace AppWeb.Controllers
         [HttpPost]
         public ActionResult EditCategory(Category model)
         {
-            string cs = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-            try
-            {
-                var x = Data.GetAllCategories().Find(elem => elem.CategoriaId == model.CategoriaId);
-                if (x != null)
-                {
-                    SqlConnection sqlConnection = new SqlConnection(cs);
-                    using (SqlCommand command = new SqlCommand("UpdateCategory", sqlConnection))
-                    {
-                        command.CommandType = CommandType.StoredProcedure;
-                        command.Parameters.Add("@idcate", SqlDbType.Int);
-                        command.Parameters["@idcate"].Value = model.CategoriaId;
-                        command.Parameters.Add("@categoria", SqlDbType.VarChar);
-                        command.Parameters["@categoria"].Value = model.Categoria;
-                        sqlConnection.Open();
-                        command.ExecuteNonQuery();
-                    }
-                    sqlConnection.Close();
-                    Debug.WriteLine("Categoria editada");
-                }
-                else
-                {
-                    return RedirectToAction("EditCategory", "Categories");
-                }               
-
-            }
-            catch (Exception ea)
-            {
-                Debug.WriteLine($"Error: {ea.Message}");
-            }
-            return RedirectToAction("Index", "Categories");
-            
+            Data.EditCategory(model);       
+            return RedirectToAction("Index", "Categories");            
         }
 
     }
