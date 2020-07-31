@@ -13,5 +13,6 @@ namespace AppWeb.Services
         List<Product> GetAllProducts();
         List<Category> GetAllCategories();
         void InsertCategory(Category category);
+        void DeleteCategory(string category);
     }
 }

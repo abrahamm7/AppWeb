@@ -51,28 +51,9 @@ namespace AppWeb.Controllers
         }     
         //Delete Category//
         [HttpGet]
-        public ActionResult DeleteCategory(string id)
+        public ActionResult DeleteCategory(string obj)
         {
-            string cs = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-            try
-            {
-                SqlConnection sqlConnection = new SqlConnection(cs);
-                using (SqlCommand command = new SqlCommand("DeleteCategory", sqlConnection))
-                {
-                    command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.Add("@Category", SqlDbType.VarChar);
-                    command.Parameters["@Category"].Value = id;
-                    sqlConnection.Open();
-                    command.ExecuteNonQuery();
-                }
-                sqlConnection.Close();                    
-                Debug.WriteLine("Categoria eliminada");
-              
-            }
-            catch (Exception ea)
-            {
-                Debug.WriteLine($"Error: {ea.Message}");
-            }
+            Data.DeleteCategory(obj);
             return RedirectToAction("Index","Categories");
         }
 

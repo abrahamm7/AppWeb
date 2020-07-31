@@ -79,5 +79,20 @@ namespace AppWeb.Services
                 }
             }
         }
+    
+        public void DeleteCategory(string category) //Delete Category//
+        {
+            using (IDbConnection dbConnection = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ToString()))
+            {
+                try
+                {
+                    dbConnection.Execute($"DeleteCategory '{category}'");
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                }
+            }
+        }
     }
 }
