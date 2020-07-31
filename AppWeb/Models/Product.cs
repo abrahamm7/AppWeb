@@ -7,11 +7,11 @@ namespace AppWeb.Models
 {
     public class Product
     {
-        public int IDproduct { get; set; }
-        public int IDCategory { get; set; }
-        public int IDCategoryC { get; set; }
-        public string Category { get; set; }
-        public string Name { get; set; }
-        public string Price { get; set; }
+        public int ProductoId { get; set; }
+        public int CategoriaId { get; set; }
+        public string Nombre { get; set; }
+        public string Precio { get; set; }
+        public int CategoriaID { get; set; }
+        public string Categoria { get; set; }
     }
 }

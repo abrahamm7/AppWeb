@@ -1,4 +1,5 @@
 ﻿using AppWeb.Models;
+using AppWeb.Services;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -12,6 +13,7 @@ namespace AppWeb.Controllers
 {
     public class LoginController : Controller
     {
+        DataAccessDB Data = new DataDB();
         // GET: Login
         public ActionResult Index()
         {
@@ -20,8 +22,10 @@ namespace AppWeb.Controllers
                 string btnclick = Request["signuser"];
                 if (btnclick == "Login")
                 {
-                    var x = GetUser();
-                    if (x != null)
+                    string user = Request["usertxt"];
+                    string password = Request["passtxt"];
+                    var finduser = Data.GetAllUsers().Where(element => element.Usuario == user && element.Clave == password).ToList();
+                    if (finduser != null)
                     {                        
                         return RedirectToAction("Index", "Categories");
                     }
@@ -34,62 +38,9 @@ namespace AppWeb.Controllers
             catch (Exception ex)
             {
                 Debug.WriteLine($"Error en: {ex.Message}");
-            }
+            }           
             return View();
             
-        }
-        
-        //Get all users from db//
-        public List<User> GetUser()
-        {
-            try
-            {
-                List<User> listado = new List<User>();
-
-                string name = Request["usertxt"];
-                string password = Request["passtxt"];                
-                string cs = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-                using (SqlConnection con = new SqlConnection(cs))
-                {
-                    con.Open();
-
-                    using (SqlCommand command = new SqlCommand("GetAllUser", con))
-                    {
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            if (reader.HasRows)
-                            {
-                                while (reader.Read())
-                                {
-                                    User users = new User();
-
-                                    if (reader[0] != System.DBNull.Value)
-                                    {
-                                        users.iduser = Convert.ToInt32(reader[0]);
-                                    }
-                                    if (reader[1] != System.DBNull.Value)
-                                    {
-                                        users.name = reader[1].ToString();
-                                    }
-                                    if (reader[2] != System.DBNull.Value)
-                                    {
-                                        users.password = reader[2].ToString();
-                                    }
-                                    listado.Add(users);
-                                }
-                            }
-                        }
-                    }
-                    con.Close();
-                    return listado;
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"Error: {ex.Message}");
-                return null;
-            }
-           
-        }
+        }     
     }
 }

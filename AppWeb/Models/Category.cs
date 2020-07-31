@@ -5,9 +5,9 @@ using System.Web;
 
 namespace AppWeb.Models
 {
-    public class Categorie
+    public class Category
     {
-        public int idcategorie { get; set; }
-        public string categorie { get; set; }
+        public int CategoriaId { get; set; }
+        public string Categoria { get; set; }
     }
 }

@@ -31,17 +31,17 @@
             <tbody>
                 <tr>
                     <td>
-                        @item.Name
+                        @item.Nombre
                     </td>
                     <td>
-                        @item.Price
+                        @item.Precio
                     </td>
                     <td>
-                        @item.Category
+                        @item.Categoria
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "EditProduct", new { id = item.IDproduct })
-                        @Html.ActionLink("Delete", "DeleteProduct", new { id = item.IDproduct })
+                        @Html.ActionLink("Edit", "EditProduct", new { id = item.ProductoId })
+                        @Html.ActionLink("Delete", "DeleteProduct", new { id = item.ProductoId })
                     </td>
                 </tr>
             </tbody>

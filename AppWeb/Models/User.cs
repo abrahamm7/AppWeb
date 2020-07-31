@@ -7,10 +7,10 @@ namespace AppWeb.Models
 {
     public class User
     {
-        public int iduser { get; set; }
-        public string username { get; set; }
-        public string password { get; set; }
-        public string name { get; set; }
-        public string lastname { get; set; }
+        public int UserId { get; set; }
+        public string Usuario { get; set; }
+        public string Nombre { get; set; }
+        public string Apellido { get; set; }
+        public string Clave { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model List<AppWeb.Models.Categorie>
+﻿@model List<AppWeb.Models.Category>
 @{
     ViewBag.Title = "Category";
 }
@@ -32,11 +32,11 @@
 
             <tr>
                 <td>
-                    @item.categorie
+                    @item.Categoria
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "EditCategory", new { id = item.idcategorie })
-                    @Html.ActionLink("Delete", "DeleteCategory", new { id = item.categorie })
+                    @Html.ActionLink("Edit", "EditCategory", new { id = item.CategoriaId })
+                    @Html.ActionLink("Delete", "DeleteCategory", new { id = item.CategoriaId })
                 </td>
             </tr>
 

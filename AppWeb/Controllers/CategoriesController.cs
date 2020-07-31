@@ -1,4 +1,5 @@
 ﻿using AppWeb.Models;
+using AppWeb.Services;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -15,100 +16,39 @@ namespace AppWeb.Controllers
     public class CategoriesController : Controller
     {
        
-        Categorie categorie = new Categorie();
+        Category Category = new Category();
+        DataAccessDB Data = new DataDB();
         // GET: Categories
         public ActionResult Index()
         {
-            var x = GetCategories();
+            string btnclick = Request["btncategory"];
+            if (btnclick == "Add")
+            {
+                var text = Request["categorytxt"];
+                if (!string.IsNullOrEmpty(text))
+                {
+                    Category.Categoria = text;
+                }
+                Data.InsertCategory(Category);                
+            }
             try
             {
-                string btnclick = Request["btncategory"];
-                if (btnclick == "Add")
+                var obtaincategories = Data.GetAllCategories();
+                if (obtaincategories.Count != 0)
                 {
-                    var text = Request["categorytxt"];
-                    if (!string.IsNullOrEmpty(text))
-                    {
-                        categorie.categorie = text;
-                    }                  
-                    InsertCategory(categorie);
-                    return View(x);
+                    return View(obtaincategories);
                 }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"Error en: {ex.Message}");
-            }
-            return View(x);
-        }
-        //Get All categories from the DB//
-        public List<Categorie> GetCategories()
-        {
-            try
-            {               
-                List<Categorie> categories = new List<Categorie>();
-                string cs = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-                using (SqlConnection con = new SqlConnection(cs))
+                else
                 {
-                    con.Open();
-
-                    using (SqlCommand command = new SqlCommand("GetAllCategories", con))
-                    {
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            if (reader.HasRows)
-                            {
-                                while (reader.Read())
-                                {
-                                    Categorie categorie = new Categorie();
-
-                                    if (reader[0] != System.DBNull.Value)
-                                    {
-                                        categorie.idcategorie = Convert.ToInt32(reader[0]);
-                                    }
-                                    if (reader[1] != System.DBNull.Value)
-                                    {
-                                        categorie.categorie = reader[1].ToString();
-                                    }                                   
-                                    categories.Add(categorie);
-                                }
-                            }
-                        }
-                    }
-                    con.Close();
-                    return categories;
-                }
+                    return View();
+                }               
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"Error: {ex.Message}");
-                return null;
+                return View();
             }
-        }
-
-        //Insert new Category//
-        public void InsertCategory(Categorie categorie)
-        {
-            string cs = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-            try
-            {                
-                SqlConnection sqlConnection = new SqlConnection(cs);
-                using (SqlCommand command = new SqlCommand("InsertCategory", sqlConnection))
-                {
-                    command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.Add("@categoria", SqlDbType.VarChar);
-                    command.Parameters["@categoria"].Value = categorie.categorie;                   
-                    sqlConnection.Open();
-                    command.ExecuteNonQuery();
-                }
-                sqlConnection.Close();
-                Debug.WriteLine("Categoria Registrada");
-            }
-            catch (Exception ea)
-            {
-                Debug.WriteLine($"Error: {ea.Message}");
-            }            
-        }
-    
+        }     
         //Delete Category//
         [HttpGet]
         public ActionResult DeleteCategory(string id)
@@ -141,7 +81,7 @@ namespace AppWeb.Controllers
         {
             if (id != null)
             {
-                var x = GetCategories().Find(elem => elem.idcategorie == id);
+                var x = Data.GetAllCategories().Find(elem => elem.CategoriaId == id);
                 return View(x);               
             }
             else
@@ -152,12 +92,12 @@ namespace AppWeb.Controllers
 
         //Update catgory method//
         [HttpPost]
-        public ActionResult EditCategory(Categorie model)
+        public ActionResult EditCategory(Category model)
         {
             string cs = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
             try
             {
-                var x = GetCategories().Find(elem => elem.idcategorie == model.idcategorie);
+                var x = Data.GetAllCategories().Find(elem => elem.CategoriaId == model.CategoriaId);
                 if (x != null)
                 {
                     SqlConnection sqlConnection = new SqlConnection(cs);
@@ -165,9 +105,9 @@ namespace AppWeb.Controllers
                     {
                         command.CommandType = CommandType.StoredProcedure;
                         command.Parameters.Add("@idcate", SqlDbType.Int);
-                        command.Parameters["@idcate"].Value = model.idcategorie;
+                        command.Parameters["@idcate"].Value = model.CategoriaId;
                         command.Parameters.Add("@categoria", SqlDbType.VarChar);
-                        command.Parameters["@categoria"].Value = model.categorie;
+                        command.Parameters["@categoria"].Value = model.Categoria;
                         sqlConnection.Open();
                         command.ExecuteNonQuery();
                     }

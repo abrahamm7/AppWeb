@@ -20,10 +20,10 @@ namespace AppWeb.Controllers
             {
                 User user = new User();
                 string btnclick = Request["signupuser"];
-                user.name = Request["nametxt"];
-                user.lastname = Request["lasttxt"];
-                user.username = Request["usertxt"];
-                user.password = Request["passtxt"];
+                user.Nombre = Request["nametxt"];
+                user.Apellido = Request["lasttxt"];
+                user.Usuario = Request["usertxt"];
+                user.Clave = Request["passtxt"];
                 if (btnclick == "SignUp")
                 {
                     InsertUser(user);
@@ -47,13 +47,13 @@ namespace AppWeb.Controllers
                 {
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.Add("@nombre", SqlDbType.VarChar);
-                    command.Parameters["@nombre"].Value = user.name; 
+                    command.Parameters["@nombre"].Value = user.Nombre; 
                     command.Parameters.Add("@apellido", SqlDbType.VarChar);
-                    command.Parameters["@apellido"].Value = user.lastname; 
+                    command.Parameters["@apellido"].Value = user.Apellido; 
                     command.Parameters.Add("@clave", SqlDbType.VarChar);
-                    command.Parameters["@clave"].Value = user.password; 
+                    command.Parameters["@clave"].Value = user.Clave; 
                     command.Parameters.Add("@usuario", SqlDbType.VarChar);
-                    command.Parameters["@usuario"].Value = user.username;
+                    command.Parameters["@usuario"].Value = user.Usuario;
                     sqlConnection.Open();
                     command.ExecuteNonQuery();
                 }

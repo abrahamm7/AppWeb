@@ -22,14 +22,14 @@
         {
             <tr>
                 <td>
-                    @item.name
-                    @item.lastname
-                    @item.username
+                    @item.Nombre
+                    @item.Apellido
+                    @item.Usuario
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "EditUser", new { iduser = item.iduser })
-                    @Html.ActionLink("Delete", "DeleteUser", new { iduser = item.iduser })
-                    @Html.ActionLink("View", "ViewUser", new { iduser = item.iduser })
+                    @Html.ActionLink("Edit", "EditUser", new { iduser = item.UserId })
+                    @Html.ActionLink("Delete", "DeleteUser", new { iduser = item.UserId })
+                    @Html.ActionLink("View", "ViewUser", new { iduser = item.UserId })
                 </td>
             </tr>
         }
