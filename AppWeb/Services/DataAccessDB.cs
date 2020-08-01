@@ -15,5 +15,7 @@ namespace AppWeb.Services
         void InsertCategory(Category category);
         void DeleteCategory(string category);
         void EditCategory(Category category);
+        void DeleteUser(int id);
+        void EditUser(User user);
     }
 }

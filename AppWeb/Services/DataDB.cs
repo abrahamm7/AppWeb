@@ -95,13 +95,43 @@ namespace AppWeb.Services
             }
         }
     
-        public void EditCategory(Category category) //UpdateCategory//
+        public void EditCategory(Category category) //Update Category//
         {
             using (IDbConnection dbConnection = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ToString()))
             {
                 try
                 {
                     dbConnection.Execute($"UpdateCategory '{category.CategoriaId}', '{category.Categoria}'");
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                }
+            }
+        }
+    
+        public void DeleteUser(int id) //Delete User//
+        {
+            using (IDbConnection dbConnection = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ToString()))
+            {
+                try
+                {
+                    dbConnection.Execute($"DeleteUser '{id}'");
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                }
+            }
+        }
+    
+        public void EditUser(User user)
+        {
+            using (IDbConnection dbConnection = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ToString()))
+            {
+                try
+                {
+                    dbConnection.Execute($"UpdateUser '{user.UserId}', '{user.Nombre}','{user.Apellido}','{user.Clave}','{user.Usuario}'");
                 }
                 catch (Exception ex)
                 {

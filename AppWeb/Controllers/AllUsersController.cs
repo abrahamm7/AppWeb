@@ -50,72 +50,19 @@ namespace AppWeb.Controllers
             }
         }
         //Delete Users//
-        //[HttpGet]
-        //public ActionResult DeleteUser(int iduser)
-        //{
-        //    string cs = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-        //    try
-        //    {
-        //        SqlConnection sqlConnection = new SqlConnection(cs);
-        //        using (SqlCommand command = new SqlCommand("DeleteUser", sqlConnection))
-        //        {
-        //            command.CommandType = CommandType.StoredProcedure;
-        //            command.Parameters.Add("@iduser", SqlDbType.Int);
-        //            command.Parameters["@iduser"].Value = iduser;
-        //            sqlConnection.Open();
-        //            command.ExecuteNonQuery();
-        //        }
-        //        sqlConnection.Close();
-        //        Debug.WriteLine("Usuario eliminado");
+        [HttpGet]
+        public ActionResult DeleteUser(int iduser)
+        {
+            Data.DeleteUser(iduser);
+            return RedirectToAction("Index", "AllUsers");            
+        }
 
-        //    }
-        //    catch (Exception ea)
-        //    {
-        //        Debug.WriteLine($"Error: {ea.Message}");
-        //    }
-        //    return RedirectToAction("Index", "AllUsers");           
-        //}
-    
         ////Edit user//
-        //[HttpPost]
-        //public ActionResult EditUser(User model)
-        //{
-        //    string cs = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-        //    try
-        //    {
-        //        SqlConnection sqlConnection = new SqlConnection(cs);
-        //        using (SqlCommand command = new SqlCommand("UpdateUser", sqlConnection))
-        //        {
-        //            command.CommandType = CommandType.StoredProcedure;
-        //            command.Parameters.Add("@iduser", SqlDbType.Int);
-        //            command.Parameters["@iduser"].Value = model.iduser;
-        //            command.Parameters.Add("@name", SqlDbType.VarChar);
-        //            command.Parameters["@name"].Value = model.name;
-        //            command.Parameters.Add("@lastname", SqlDbType.VarChar);
-        //            command.Parameters["@lastname"].Value = model.lastname;
-        //            command.Parameters.Add("@pass", SqlDbType.Int);
-        //            command.Parameters["@pass"].Value = model.password;
-        //            command.Parameters.Add("@username", SqlDbType.VarChar);
-        //            command.Parameters["@username"].Value = model.username;
-        //            sqlConnection.Open();
-        //            command.ExecuteNonQuery();
-        //        }
-        //        sqlConnection.Close();
-        //        Debug.WriteLine("Usuario editado");
-
-        //    }
-        //    catch (Exception ea)
-        //    {
-        //        Debug.WriteLine($"Error: {ea.Message}");
-        //    }
-        //    return RedirectToAction("Index", "AllUsers");
-        //}
-
-
-        ////Get all users from db//
-        //public void GetUser()
-        //{
-            
-        //}
+        [HttpPost]
+        public ActionResult EditUser(User model)
+        {
+            Data.EditUser(model);
+            return RedirectToAction("Index", "AllUsers");
+        }
     }
 }

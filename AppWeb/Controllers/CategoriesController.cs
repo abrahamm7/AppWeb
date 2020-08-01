@@ -75,8 +75,16 @@ namespace AppWeb.Controllers
         [HttpPost]
         public ActionResult EditCategory(Category model)
         {
-            Data.EditCategory(model);       
-            return RedirectToAction("Index", "Categories");            
+            if (model != null)
+            {
+                Data.EditCategory(model);
+                return RedirectToAction("Index", "Categories");
+            }
+            else
+            {
+                return View("EditCategory", "Categories");
+            }              
+                    
         }
 
     }
