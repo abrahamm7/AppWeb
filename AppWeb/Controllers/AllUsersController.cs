@@ -14,55 +14,95 @@ namespace AppWeb.Controllers
 {
     public class AllUsersController : Controller
     {
-        DataAccessDB Data = new DataDB();
+        IDataAccessDB Data = new DataDB();
       
         // GET: AllUsers
         public ActionResult Index()
         {
-            var obtainUsers = Data.GetAllUsers();
-            return View(obtainUsers);
+            try
+            {
+                var obtainUsers = Data.GetAllUsers();
+                return View(obtainUsers);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return View();
+            }
         }      
         //Go to view for edit user//
         public ActionResult EditUser(int? iduser)
         {
-            if (iduser != null)
+            try
             {
                 var finduser = Data.GetAllUsers().Find(elem => elem.UserId == iduser);
-                return View(finduser);
+                if (finduser != null)
+                {
+                    return View(finduser);
+                }
+                else
+                {
+                    return RedirectToAction("Index", "AllUsers");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return RedirectToAction("Index", "AllUsers");
+                Debug.WriteLine(ex.Message);
+                return View();
             }
            
         }
 
-        public ActionResult ViewUser(int? iduser)
+        public ActionResult ViewUser(int iduser)
         {
-            if (iduser != null)
+            try
             {
                 var finduser = Data.GetAllUsers().Find(elem => elem.UserId == iduser);
-                return View(finduser);
+                if (finduser != null)
+                {
+                    return View(finduser);
+                }
+                else
+                {
+                    return RedirectToAction("Index", "AllUsers");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return RedirectToAction("Index", "AllUsers");
-            }
+                Debug.WriteLine(ex.Message);
+                return View();
+            }        
         }
         //Delete Users//
         [HttpGet]
         public ActionResult DeleteUser(int iduser)
         {
-            Data.DeleteUser(iduser);
-            return RedirectToAction("Index", "AllUsers");            
+            try
+            {
+                Data.DeleteUser(iduser);
+                return RedirectToAction("Index", "AllUsers");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return View();
+            }       
         }
 
         ////Edit user//
         [HttpPost]
         public ActionResult EditUser(User model)
         {
-            Data.EditUser(model);
-            return RedirectToAction("Index", "AllUsers");
+            try
+            {
+                Data.EditUser(model);
+                return RedirectToAction("Index", "AllUsers");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return View();
+            }
         }
     }
 }

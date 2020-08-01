@@ -17,7 +17,7 @@ namespace AppWeb.Controllers
     {
        
         Category Category = new Category();
-        DataAccessDB Data = new DataDB();
+        IDataAccessDB Data = new DataDB();
         // GET: Categories
         public ActionResult Index()
         {

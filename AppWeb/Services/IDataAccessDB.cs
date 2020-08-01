@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AppWeb.Services
 {
-    public interface DataAccessDB
+    public interface IDataAccessDB
     {
         List<User> GetAllUsers();
         List<Product> GetAllProducts();

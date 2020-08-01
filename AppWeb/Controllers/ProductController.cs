@@ -15,7 +15,7 @@ namespace AppWeb.Controllers
     public class ProductController : Controller
     {
         private List<SelectListItem> selectListItems;
-        DataAccessDB Data = new DataDB();
+        IDataAccessDB Data = new DataDB();
         // GET: Product
         public ActionResult Index()
         {

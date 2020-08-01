@@ -12,7 +12,7 @@ using System.Diagnostics;
 
 namespace AppWeb.Services
 {
-    public class DataDB : DataAccessDB
+    public class DataDB : IDataAccessDB
     {
         public List<User> GetAllUsers() //Obtain Users from DB//
         {
@@ -125,7 +125,7 @@ namespace AppWeb.Services
             }
         }
     
-        public void EditUser(User user)
+        public void EditUser(User user) //Edit User//
         {
             using (IDbConnection dbConnection = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ToString()))
             {
@@ -138,6 +138,6 @@ namespace AppWeb.Services
                     Debug.WriteLine(ex.Message);
                 }
             }
-        }
+        } 
     }
 }

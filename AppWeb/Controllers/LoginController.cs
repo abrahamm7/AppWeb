@@ -13,7 +13,7 @@ namespace AppWeb.Controllers
 {
     public class LoginController : Controller
     {
-        DataAccessDB Data = new DataDB();
+        IDataAccessDB Data = new DataDB();
         // GET: Login
         public ActionResult Index()
         {
