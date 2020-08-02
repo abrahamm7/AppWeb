@@ -3,54 +3,33 @@
     ViewBag.Title = "Category";
 }
 <head>
-    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
 </head>
 <h2>Categorias</h2>
 
-<form class="text-center border border-light p-5">
-
-    <input type="text" id="catetxt" name="categorytxt" class="form-control mb-4" placeholder="New category">
-
-    <br />
-
-    <button class="btn btn-primary btn-block" onclick="btnclick(s,e)" value="Add" id="addbtn" name="btncategory">Add</button>
-
-    <br />
-</form>
-<div>
-    <table class="table table-bordered">
-        <tr>
-            <th>
-                Categories
-            </th>
-            <th>
-                Actions
-            </th>
-        </tr>
-        @foreach (var item in Model)
-        {
-
-            <tr>
-                <td>
-                    @item.Categoria
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "EditCategory", new { model = item.CategoriaId })
-                    @Html.ActionLink("Delete", "DeleteCategory", new { model = item.Categoria })
-                </td>
-            </tr>
-
-
-        }
-    </table>
-
-
+<div class="text-right">
+    <a class="btn btn-outline-success" href="@Url.Action("Index", "CreateCategory")" style="width:150px">Create new</a>
 </div>
-<script type="text/javascript">
-    function btnclick(s, e) {
-        var x = document.getElementById("catetxt").value;
-        if (x == null || x.trim() === '') {
-            alert("Campo vacio");
-        }
-    }
-</script>
+<br />
+
+<div>
+    <div class="card deck light mb-3">
+        <div class="card">
+            @foreach (var item in Model)
+            {
+                <div class="card-header">
+                    <h6>@item.Categoria</h6>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Descripcion</h5>
+                    <p class="card-title">@item.Descripcion</p>
+                    <div class="text-right">
+                        @Html.ActionLink("Edit", "EditCategory", new { model = item.CategoriaId }, new { @class = "btn btn-outline-primary" })
+                        @Html.ActionLink("Delete", "DeleteCategory", new { model = item.Categoria }, new { @class = "btn btn-outline-danger" })
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -146,7 +146,7 @@ namespace AppWeb.Services
             {
                 try
                 {
-                    dbConnection.Execute($"InsertUser '{user.Nombre}', '{user.Apellido}','{user.Clave}','{user.Usuario}'");
+                    dbConnection.Execute($"InsertUser '{user.Nombre}', '{user.Apellido}','{user.Usuario}','{user.Clave}'");
                 }
                 catch (Exception ex)
                 {

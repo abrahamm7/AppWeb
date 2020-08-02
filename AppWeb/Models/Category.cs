@@ -9,5 +9,6 @@ namespace AppWeb.Models
     {
         public int CategoriaId { get; set; }
         public string Categoria { get; set; }
+        public string Descripcion { get; set; }
     }
 }
