@@ -140,7 +140,7 @@ namespace AppWeb.Services
             }
         } 
     
-        public void InsertUser(User user)
+        public void InsertUser(User user) //Insert user//
         {
             using (IDbConnection dbConnection = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ToString()))
             {

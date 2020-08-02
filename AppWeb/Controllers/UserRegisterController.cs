@@ -28,7 +28,18 @@ namespace AppWeb.Controllers
                 user.Clave = Request["passtxt"];
                 if (btnclick == "SignUp")
                 {
-                    Data.InsertUser(user);
+                    if(string.IsNullOrEmpty(user.Nombre) ||
+                        string.IsNullOrEmpty(user.Apellido) ||
+                        string.IsNullOrEmpty(user.Clave) ||
+                        string.IsNullOrEmpty(user.Usuario))
+                    {
+                        Debug.WriteLine("ss");
+                    }
+                    else
+                    {
+                        Data.InsertUser(user);
+                    }
+                   
                 }
             }
             catch (Exception ex)
