@@ -32,16 +32,9 @@
                         <br />
                         <div class="card-foter text-right">
                             <button onclick="RequestLogin()" class="btn btn-outline-success btn-group-lg my-4" style="width:150px" value="Login" id="signbtn" name="signuser">Sign in</button>
+                            <a href="@Url.Action("Index", "UserRegister")" class="btn btn-outline-primary btn-group-lg my-4" style="width:150px">Sign Up</a>
+
                         </div>
-
-                        <br />
-
-                        <p>
-                            Not a member?
-                            <a>
-                                @Html.ActionLink("Sign Up", "Index", "UserRegister")
-                            </a>
-                        </p>
                     </form>
                 </div>
             </div>
