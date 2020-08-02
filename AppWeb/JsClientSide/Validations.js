@@ -17,3 +17,12 @@ function RequestRegister() {
         window.alert("Empty fields");
     }
 }
+
+//Validation for new category
+function RequestNewCategory() {
+    var categorybox = document.getElementById("categorybox").value;
+    var descbox = document.getElementById("descbox").value;
+    if (categorybox.length == 0 || descbox.length == 0) {
+        window.alert("Empty fields");
+    }
+}
