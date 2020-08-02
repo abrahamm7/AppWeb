@@ -25,7 +25,7 @@ namespace AppWeb.Controllers
                     string user = Request["usertxt"];
                     string password = Request["passtxt"];
                     var finduser = Data.GetAllUsers().Where(element => element.Usuario == user && element.Clave == password).ToList();
-                    if (finduser != null)
+                    if (finduser.Count != 0)
                     {                        
                         return RedirectToAction("Index", "Categories");
                     }
