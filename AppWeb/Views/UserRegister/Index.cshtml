@@ -42,11 +42,12 @@
 
 
                         <br />
-                        <div class="card-foter text-right">
-                            <button onclick="RequestRegister()" class="btn btn-outline-success btn-group-lg my-4" style="width:150px" value="Login" id="signbtn" name="signuser">Sign Up</button>
+                        <div>
+                            <div class="text-right">
+                                 <a href="@Url.Action("Index", "Login")" class="btn btn-outline-primary btn-group-lg my-4" style="width:150px" value="Login" id="signbtn" name="signuser">Back</a>
+                                 <button onclick="RequestRegister()" class="btn btn-outline-success btn-group-lg my-4" style="width:150px" value="Login" id="signbtn" name="signuser">Sign Up</button>
+                            </div>
                         </div>
-
-                        <br />
                     </form>
                 </div>
             </div>
