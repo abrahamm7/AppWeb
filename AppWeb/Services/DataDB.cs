@@ -139,5 +139,20 @@ namespace AppWeb.Services
                 }
             }
         } 
+    
+        public void InsertUser(User user)
+        {
+            using (IDbConnection dbConnection = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ToString()))
+            {
+                try
+                {
+                    dbConnection.Execute($"InsertUser '{user.Nombre}', '{user.Apellido}','{user.Clave}','{user.Usuario}'");
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                }
+            }
+        }
     }
 }
