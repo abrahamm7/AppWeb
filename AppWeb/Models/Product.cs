@@ -11,7 +11,6 @@ namespace AppWeb.Models
         public int CategoriaId { get; set; }
         public string Nombre { get; set; }
         public string Precio { get; set; }
-        public int CategoriaID { get; set; }
         public string Categoria { get; set; }
     }
 }
