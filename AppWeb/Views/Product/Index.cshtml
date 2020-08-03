@@ -10,7 +10,7 @@
 </head>
 
 <div class="text-right">
-    <a class="btn btn-outline-success" href="@Url.Action("Create", "NewProduct")" style="width:150px">Create new</a>
+    <a class="btn btn-outline-success" href="@Url.Action("NewProduct","Product")" style="width:150px">Create new</a>
 </div>
 <br />
 
@@ -18,12 +18,10 @@
     @foreach (var item in Model)
     {
         <div class="card border-primary mb-3" style="width:350px;">
-            @*<img class="card-img-top" src="..." alt="Card image cap">*@
             <div class="card-header"><h5>@item.Nombre</h5></div>
             <div class="card-body">
                 <p class="card-text">Category of this product</p>
                 <p class="card-text">@item.Categoria</p>
-                @*<p class="card-footer"><small class="text-muted">Last updated 3 mins ago</small></p>*@
             </div>
             <div class="card-footer">
                 <p>Price: $@item.Precio</p>
