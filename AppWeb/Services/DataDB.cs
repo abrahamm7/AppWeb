@@ -154,5 +154,37 @@ namespace AppWeb.Services
                 }
             }
         }
+
+        public void InsertProduct(Product product) //Insert user//
+        {
+            using (IDbConnection dbConnection = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ToString()))
+            {
+                try
+                {
+                    dbConnection.Execute($"InsertProduct '{product.Nombre}', '{product.Precio}','{product.CategoriaId}'");
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                }
+            }
+        }
+
+        public void DeleteProduct(int product) //Insert user//
+        {
+            using (IDbConnection dbConnection = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ToString()))
+            {
+                try
+                {
+                    dbConnection.Execute($"DeleteProduct '{product}'");
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                }
+            }
+        }
+
+
     }
 }

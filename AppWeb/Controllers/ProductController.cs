@@ -23,48 +23,16 @@ namespace AppWeb.Controllers
             return View(obtainprodcuts);
         }      
        
-      
-       
-        //Insert product in db//
-        public void InsertProduct(Product product)
-        {
-            string cs = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-            try
-            {
-                SqlConnection sqlConnection = new SqlConnection(cs);
-                using (SqlCommand command = new SqlCommand("InsertProduct", sqlConnection))
-                {
-                    command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.Add("@name", SqlDbType.VarChar);
-                    command.Parameters["@name"].Value = product.Nombre;
-                    command.Parameters.Add("@price", SqlDbType.Int);
-                    command.Parameters["@price"].Value = product.Precio;
-                    command.Parameters.Add("@category", SqlDbType.Int);
-                    command.Parameters["@category"].Value = product.CategoriaId;
-                    sqlConnection.Open();
-                    command.ExecuteNonQuery();
-                }
-                sqlConnection.Close();
-                Debug.WriteLine("Producto agregado");
-                RedirectToAction("Index", "Product");
-            }
-            catch (Exception ea)
-            {
-                Debug.WriteLine($"Error: {ea.Message}");
-            }
-            
-        }    
-        
         public ActionResult NewProduct()
         {
             Product product = new Product();
-            var xy = Data.GetAllCategories();
-            var obj = xy;
+            var obtaincategories = Data.GetAllCategories();
             selectListItems = new List<SelectListItem>();
-            foreach (var item in obj)
+            foreach (var item in obtaincategories)
             {
                 selectListItems.Add(new SelectListItem
                 {
+                    Selected = (item.CategoriaId == item.CategoriaId),
                     Text = item.Categoria,
                     Value = item.CategoriaId.ToString()
                 });
@@ -77,9 +45,15 @@ namespace AppWeb.Controllers
                 {
                     product.Nombre = Request["nametxt"];
                     product.Precio = Request["pricetxt"];
-                    var p = selectListItems.Select(elem => elem.Value).ToList();
-                    product.CategoriaId = Convert.ToInt32(p.FirstOrDefault());
-                    InsertProduct(product);
+                    product.Categoria = Request["category"];
+
+                    //var p = selectListItems.Find(elem => elem.Value);
+                    //product.CategoriaId = 
+                    if (!string.IsNullOrEmpty(product.Nombre) || !string.IsNullOrEmpty(product.Precio) || !string.IsNullOrEmpty(product.CategoriaId.ToString()))
+                    {
+                        Data.InsertProduct(product);
+                    }                   
+                    return RedirectToAction("Index", "Product");
                 }
             }
             catch (Exception ex)
@@ -92,21 +66,10 @@ namespace AppWeb.Controllers
         [HttpGet]
         public ActionResult DeleteProduct(int id)
         {
-            string cs = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
             try
             {
-                SqlConnection sqlConnection = new SqlConnection(cs);
-                using (SqlCommand command = new SqlCommand("DeleteProduct", sqlConnection))
-                {
-                    command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.Add("@idproduct", SqlDbType.Int);
-                    command.Parameters["@idproduct"].Value = id;
-                    sqlConnection.Open();
-                    command.ExecuteNonQuery();
-                }
-                sqlConnection.Close();
-                Debug.WriteLine("Producto eliminado");
-
+                Data.DeleteProduct(id);
+                return RedirectToAction("Index", "Product");
             }
             catch (Exception ea)
             {
@@ -118,16 +81,15 @@ namespace AppWeb.Controllers
         //Edit product//
         public ActionResult EditProduct(int? id)
         {
-            //if (id != null)
-            //{
-            //    var x = GetProducts().Find(elem => elem.IDproduct == id);
-            //    return View(x);
-            //}
-            //else
-            //{
-            //    return RedirectToAction("Index", "Product");
-            //}
-            return View();
+            if (id != null)
+            {
+                var x = Data.GetAllProducts().Find(elem => elem.ProductoId == id);
+                return View(x);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Product");
+            }
         }
         
         //Edit product in db//

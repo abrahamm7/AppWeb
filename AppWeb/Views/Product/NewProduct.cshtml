@@ -4,30 +4,31 @@
     ViewBag.Title = "New product";
 }
 
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <script type="text/javascript" src="../JsClientSide/Validations.js"></script>
+    </head>
 <h2>New Product</h2>
 
 <form class="text-center border border-light p-5">
+    <div class="card">
+        <div class="card-body">
+            <input type="text" id="nameproductbox" name="nametxt" class="form-control mb-4" placeholder="Name">
 
-    <input type="text" id="namebox" name="nametxt" class="form-control mb-4" placeholder="Name">
+
+            <input type="text" id="priceproductbox" name="pricetxt" class="form-control mb-4" placeholder="Price">
+            <div class="form-group">
+                @Html.DropDownList("category", ViewBag.categ as List<SelectListItem>,
+                                   "Select Category", new { @class = "form-control", @id = "listview" })
+            </div>
+
+            <div class="text-right">
+                <button class="btn btn-outline-success" style="width:150px;" onclick="RequestNewProduct()" value="Create" id="signupbtn" name="addproduct" type="submit">Create</button>
+            </div>
 
 
-    <input type="text" id="pricebox" name="pricetxt" class="form-control mb-4" placeholder="Price">
-
-    <div class="row">
-        <div class="form-group">
-            @Html.DropDownList("category", ViewBag.categ as List<SelectListItem>,
-                               "Select Category", new { @class = "form-control" })
         </div>
-    </div>
 
-    <button class="btn btn-info btn-block my-4" onclick="btnclick(s,e)" value="Create" id="signupbtn" name="addproduct" type="submit">Create</button>
+    </div>
+   
 </form>
-@*<script type="text/javascript">
-    function btnclick(s, e) {
-        var x = document.getElementById("namebox").value;
-        var xy = document.getElementById("pricebox").value;
-        if (x == null || x.trim() === '' || xy == null || xy.trim() === '' ) {
-            alert("Campo vacio");
-        }
-    }
-</script>*@
