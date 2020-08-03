@@ -61,7 +61,7 @@ namespace AppWeb.Controllers
 
         //Update catgory method//
         [HttpPost]
-        public ActionResult EditCategory(Category id)  //Check that//
+        public ActionResult EditCategory(Category id) 
         {
             if (id != null)
             {
