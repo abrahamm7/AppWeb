@@ -20,8 +20,8 @@ function RequestRegister() {
 
 //Validation for new category
 function RequestNewCategory() {
-    var categorybox = document.getElementById("categorybox").value;
-    var descbox = document.getElementById("descbox").value;
+    var categorybox = document.getElementById("categotxt").value;
+    var descbox = document.getElementById("desctxt").value;
     if (categorybox.length == 0 || descbox.length == 0) {
         window.alert("Empty fields");
     }

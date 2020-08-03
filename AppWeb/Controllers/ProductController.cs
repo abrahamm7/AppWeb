@@ -57,35 +57,35 @@ namespace AppWeb.Controllers
         
         public ActionResult NewProduct()
         {
-            //Product product = new Product();
-            //var xy = GetCategories();
-            //var obj = xy;
-            //selectListItems = new List<SelectListItem>();
-            //foreach (var item in obj)
-            //{
-            //    selectListItems.Add(new SelectListItem
-            //    {
-            //        Text = item.categorie,
-            //        Value = item.idcategorie.ToString()
-            //    });
-            //}
-            //ViewBag.categ = selectListItems;
-            //try
-            //{
-            //    string btnclick = Request["addproduct"];
-            //    if (btnclick == "Create")
-            //    {                  
-            //        product.Nombre = Request["nametxt"];
-            //        product.Precio = Request["pricetxt"];
-            //        var p = selectListItems.Select(elem => elem.Value).ToList();
-            //        product.CategoriaId = Convert.ToInt32(p.FirstOrDefault());
-            //        InsertProduct(product);                    
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    Debug.WriteLine($"Error en: {ex.Message}");
-            //}
+            Product product = new Product();
+            var xy = Data.GetAllCategories();
+            var obj = xy;
+            selectListItems = new List<SelectListItem>();
+            foreach (var item in obj)
+            {
+                selectListItems.Add(new SelectListItem
+                {
+                    Text = item.Categoria,
+                    Value = item.CategoriaId.ToString()
+                });
+            }
+            ViewBag.categ = selectListItems;
+            try
+            {
+                string btnclick = Request["addproduct"];
+                if (btnclick == "Create")
+                {
+                    product.Nombre = Request["nametxt"];
+                    product.Precio = Request["pricetxt"];
+                    var p = selectListItems.Select(elem => elem.Value).ToList();
+                    product.CategoriaId = Convert.ToInt32(p.FirstOrDefault());
+                    InsertProduct(product);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error en: {ex.Message}");
+            }
             return View();
         }
         //Delete product in db//

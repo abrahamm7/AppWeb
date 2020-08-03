@@ -6,51 +6,56 @@
 <h2>Productos</h2>
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    
+
 </head>
 
+<div class="text-right">
+    <a class="btn btn-outline-success" href="@Url.Action("Create", "NewProduct")" style="width:150px">Create new</a>
+</div>
+<br />
 @Html.ActionLink("Create", "NewProduct")
-<div>
-    <table class="table table-bordered">
+
+<div class="card-deck d-flex flex-nowrap">
+    @foreach (var item in Model)
+    {
+        <div class="card border-primary mb-3">
+            @*<img class="card-img-top" src="..." alt="Card image cap">*@
+            <div class="card-header"><h5>@item.Nombre</h5></div>
+            <div class="card-body">
+                <p class="card-text">Category of this product</p>
+                <p class="card-text">@item.Categoria</p>
+                @*<p class="card-footer"><small class="text-muted">Last updated 3 mins ago</small></p>*@
+            </div>
+            <div class="card-footer">
+                <p>Price: $@item.Precio</p>
+                <div class="text-right">
+                    @Html.ActionLink("Edit", "EditProduct", new { id = item.ProductoId }, new { @class = "btn btn-outline-primary" })
+                    @Html.ActionLink("Delete", "DeleteProduct", new { id = item.ProductoId }, new { @class = "btn btn-outline-danger" })
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+
+
+
+
+@*<tbody>
         <tr>
-            <th>
-                Products
-            </th>
-            <th>
-                Price
-            </th>
-            <th>
-                Category
-            </th>
-            <th>
-                Actions
-            </th>
+            <td>
+                @item.Nombre
+            </td>
+            <td>
+                @item.Precio
+            </td>
+            <td>
+                @item.Categoria
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditProduct", new { id = item.ProductoId })
+                @Html.ActionLink("Delete", "DeleteProduct", new { id = item.ProductoId })
+            </td>
         </tr>
-        @foreach (var item in Model)
-        {
-
-            <tbody>
-                <tr>
-                    <td>
-                        @item.Nombre
-                    </td>
-                    <td>
-                        @item.Precio
-                    </td>
-                    <td>
-                        @item.Categoria
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "EditProduct", new { id = item.ProductoId })
-                        @Html.ActionLink("Delete", "DeleteProduct", new { id = item.ProductoId })
-                    </td>
-                </tr>
-            </tbody>
-
-
-        }
-
-    </table>
-
-    </div>
-
+    </tbody>*@

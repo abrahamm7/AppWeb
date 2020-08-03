@@ -15,22 +15,10 @@ namespace AppWeb.Controllers
 {
     public class CategoriesController : Controller
     {
-       
-        Category Category = new Category();
         IDataAccessDB Data = new DataDB();
         // GET: Categories
         public ActionResult Index()
-        {
-            string btnclick = Request["btncategory"];
-            if (btnclick == "Add")
-            {
-                var text = Request["categorytxt"];
-                if (!string.IsNullOrEmpty(text))
-                {
-                    Category.Categoria = text;
-                }
-                Data.InsertCategory(Category);                
-            }
+        {           
             try
             {
                 var obtaincategories = Data.GetAllCategories();
@@ -73,7 +61,7 @@ namespace AppWeb.Controllers
 
         //Update catgory method//
         [HttpPost]
-        public ActionResult EditCategory(Category model)
+        public ActionResult EditCategory(Category model)  //Check that//
         {
             if (model != null)
             {
@@ -82,7 +70,7 @@ namespace AppWeb.Controllers
             }
             else
             {
-                return View("EditCategory", "Categories");
+                return View(model);
             }              
                     
         }

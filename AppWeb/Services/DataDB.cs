@@ -101,7 +101,7 @@ namespace AppWeb.Services
             {
                 try
                 {
-                    dbConnection.Execute($"UpdateCategory '{category.CategoriaId}', '{category.Categoria}'");
+                    dbConnection.Execute($"UpdateCategory '{category.CategoriaId}', '{category.Categoria}','{category.Descripcion}'");
                 }
                 catch (Exception ex)
                 {

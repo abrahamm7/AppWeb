@@ -1,4 +1,4 @@
-﻿@model List<AppWeb.Models.Categorie>
+﻿@model List<AppWeb.Models.Category>
 
 @{
     ViewBag.Title = "New product";
@@ -22,7 +22,7 @@
 
     <button class="btn btn-info btn-block my-4" onclick="btnclick(s,e)" value="Create" id="signupbtn" name="addproduct" type="submit">Create</button>
 </form>
-<script type="text/javascript">
+@*<script type="text/javascript">
     function btnclick(s, e) {
         var x = document.getElementById("namebox").value;
         var xy = document.getElementById("pricebox").value;
@@ -30,4 +30,4 @@
             alert("Campo vacio");
         }
     }
-</script>
+</script>*@
