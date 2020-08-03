@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
 </head>
-<h2>Categorias</h2>
+<h2>Categories</h2>
 
 <div class="text-right">
     <a class="btn btn-outline-success" href="@Url.Action("Index", "CreateCategory")" style="width:150px">Create new</a>
@@ -22,7 +22,7 @@
                     <h6>@item.Categoria</h6>                   
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">Descripcion</h5>
+                    <h5 class="card-title">Description</h5>
                     <p class="card-title">@item.Descripcion</p>
                     <div class="text-right">
                         @Html.ActionLink("Edit", "EditCategory", new { model = item.CategoriaId }, new { @class = "btn btn-outline-primary" })
