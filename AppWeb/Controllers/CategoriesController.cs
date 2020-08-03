@@ -61,16 +61,16 @@ namespace AppWeb.Controllers
 
         //Update catgory method//
         [HttpPost]
-        public ActionResult EditCategory(Category model)  //Check that//
+        public ActionResult EditCategory(Category id)  //Check that//
         {
-            if (model != null)
+            if (id != null)
             {
-                Data.EditCategory(model);
+                Data.EditCategory(id);
                 return RedirectToAction("Index", "Categories");
             }
             else
             {
-                return View(model);
+                return View(id);
             }              
                     
         }

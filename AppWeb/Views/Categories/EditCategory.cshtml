@@ -18,6 +18,10 @@
                 <div class="card-body text-center">
                     <form class="text-center p-5">
                         <div class="md-form mat-2">
+                            @Html.TextBoxFor(model => model.CategoriaId, new { @class = "form-control", @id = "idcateg", @readonly = "readonly" })
+                        </div>
+                        <br />
+                        <div class="md-form mat-2">
                             @Html.TextBoxFor(model => model.Categoria, new { @class = "form-control", @id = "categotxt" })
                         </div>
                         <br />
@@ -26,7 +30,7 @@
                         </div>
                         <div>
                             <div class="text-right">
-                                <input onclick="RequestNewCategory()" class="btn btn-outline-success btn-group-lg my-4" style="width:150px" value="Save" type="submit" name="createcategory">
+                                <input onclick="RequestNewCategory()" class="btn btn-outline-success btn-group-lg my-4" style="width:150px" value="Save" type="submit">
                             </div>
                         </div>
                     </form>
