@@ -43,12 +43,12 @@ namespace AppWeb.Controllers
                 string btnclick = Request["addproduct"];
                 if (btnclick == "Create")
                 {
+                    var p = selectListItems.Select(elem => elem.Value).ToList();
                     product.Nombre = Request["nametxt"];
                     product.Precio = Request["pricetxt"];
                     product.Categoria = Request["category"];
+                    product.CategoriaId = Convert.ToInt32(p.FirstOrDefault());
 
-                    //var p = selectListItems.Find(elem => elem.Value);
-                    //product.CategoriaId = 
                     if (!string.IsNullOrEmpty(product.Nombre) || !string.IsNullOrEmpty(product.Precio) || !string.IsNullOrEmpty(product.CategoriaId.ToString()))
                     {
                         Data.InsertProduct(product);
@@ -68,26 +68,42 @@ namespace AppWeb.Controllers
         {
             try
             {
-                Data.DeleteProduct(id);
+                if (id != null)
+                {
+                    Data.DeleteProduct(id);
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Product");
+                }
                 return RedirectToAction("Index", "Product");
+
             }
             catch (Exception ea)
             {
                 Debug.WriteLine($"Error: {ea.Message}");
-            }
-            return RedirectToAction("Index", "Product");
+                return RedirectToAction("Index", "Product");
+            }            
         }
         
         //Edit product//
         public ActionResult EditProduct(int? id)
         {
-            if (id != null)
+            try
             {
-                var x = Data.GetAllProducts().Find(elem => elem.ProductoId == id);
-                return View(x);
+                if (id != null)
+                {
+                    var x = Data.GetAllProducts().Find(elem => elem.ProductoId == id);
+                    return View(x);
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Product");
+                }
             }
-            else
+            catch (Exception ea)
             {
+                Debug.WriteLine($"Error: {ea.Message}");
                 return RedirectToAction("Index", "Product");
             }
         }
@@ -96,31 +112,24 @@ namespace AppWeb.Controllers
         [HttpPost]
         public ActionResult EditProduct(Product model)
         {
-            string cs = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
             try
             {
-                SqlConnection sqlConnection = new SqlConnection(cs);
-                using (SqlCommand command = new SqlCommand("UpdateProduct", sqlConnection))
+                if (model != null)
                 {
-                    command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.Add("@idproduct", SqlDbType.Int);
-                    command.Parameters["@idproduct"].Value = model.ProductoId;
-                    command.Parameters.Add("@name", SqlDbType.VarChar);
-                    command.Parameters["@name"].Value = model.Nombre;
-                    command.Parameters.Add("@precio", SqlDbType.Int);
-                    command.Parameters["@precio"].Value = model.Precio;                
-                    sqlConnection.Open();
-                    command.ExecuteNonQuery();
+                    Data.UpdateProduct(model);
                 }
-                sqlConnection.Close();
-                Debug.WriteLine("Producto editado");
-
+                else
+                {
+                   return RedirectToAction("Index", "Product");
+                }
+                return RedirectToAction("Index", "Product");
             }
             catch (Exception ea)
             {
                 Debug.WriteLine($"Error: {ea.Message}");
+                return RedirectToAction("Index", "Product");
             }
-            return RedirectToAction("Index", "Product");
+            
         }
 
     }

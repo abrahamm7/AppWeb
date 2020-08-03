@@ -184,6 +184,20 @@ namespace AppWeb.Services
                 }
             }
         }
+        public void UpdateProduct(Product product) //Insert user//
+        {
+            using (IDbConnection dbConnection = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ToString()))
+            {
+                try
+                {
+                    dbConnection.Execute($"UpdateProduct '{product.ProductoId}','{product.Nombre}','{product.Precio}'");
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                }
+            }
+        }
 
 
     }

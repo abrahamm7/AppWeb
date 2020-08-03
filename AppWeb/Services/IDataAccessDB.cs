@@ -20,5 +20,6 @@ namespace AppWeb.Services
         void InsertUser(User user);
         void InsertProduct(Product product);
         void DeleteProduct(int id);
+        void UpdateProduct(Product product);
     }
 }
