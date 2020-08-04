@@ -129,7 +129,7 @@ namespace AppWeb.Controllers
             try
             {
                 model.CategoriaId = Convert.ToInt32(Request["category"]);
-                if (model != null)
+                if (model.Nombre != null && model.Precio != null && model.CategoriaId != 0)
                 {
                     Data.UpdateProduct(model);
                 }
