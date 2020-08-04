@@ -99,6 +99,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Images\Ideas.jpg" />
+    <Content Include="Images\Regis.jpg" />
     <Content Include="JsClientSide\Validations.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
