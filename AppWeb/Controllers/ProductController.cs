@@ -47,14 +47,14 @@ namespace AppWeb.Controllers
                     var categorycode = Request["category"];
                     product.Nombre = Request["nametxt"];
                     product.Precio = Request["pricetxt"];
-                    product.Categoria = Request["category"];
                     product.CategoriaId = Convert.ToInt32(categorycode);
 
-                    if (!string.IsNullOrEmpty(product.Nombre) || !string.IsNullOrEmpty(product.Precio) || !string.IsNullOrEmpty(product.CategoriaId.ToString()))
+                    if (!string.IsNullOrEmpty(product.Nombre) &&  !string.IsNullOrEmpty(product.Precio) && !string.IsNullOrEmpty(product.CategoriaId.ToString()))
                     {
                         Data.InsertProduct(product);
+                        return RedirectToAction("Index", "Product");
                     }
-                    return RedirectToAction("Index", "Product");
+                    return View();
                 }
             }
             catch (Exception ex)
