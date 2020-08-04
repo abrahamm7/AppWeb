@@ -36,3 +36,13 @@ function RequestNewProduct() {
         window.alert("Empty fields");
     }
 }
+
+//Validation for edit product//
+function RequestForEditProduct() {
+    var nombretxt = document.getElementById("nombretxt").value;
+    var preciotxt = document.getElementById("preciotxt").value;
+    var listview = document.getElementById("listview").value;
+    if (nombretxt.length == 0 || preciotxt.length == 0 || listview.length == 0) {
+        window.alert("Empty fields");
+    }
+}

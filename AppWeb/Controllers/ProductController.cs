@@ -44,10 +44,9 @@ namespace AppWeb.Controllers
                 string btnclick = Request["addproduct"];
                 if (btnclick == "Create")
                 {
-                    var categorycode = Request["category"];
                     product.Nombre = Request["nametxt"];
                     product.Precio = Request["pricetxt"];
-                    product.CategoriaId = Convert.ToInt32(categorycode);
+                    product.CategoriaId = Convert.ToInt32(Request["category"]);
 
                     if (!string.IsNullOrEmpty(product.Nombre) &&  !string.IsNullOrEmpty(product.Precio) && !string.IsNullOrEmpty(product.CategoriaId.ToString()))
                     {
@@ -92,6 +91,20 @@ namespace AppWeb.Controllers
         {
             try
             {
+                var obtaincategories = Data.GetAllCategories(); 
+                selectListItems = new List<SelectListItem>();
+                foreach (var item in obtaincategories)//Fill list of categories//
+                {
+                    selectListItems.Add(new SelectListItem
+                    {
+                        Selected = true,
+                        Text = item.Categoria,
+                        Value = item.CategoriaId.ToString()
+                    });
+                }
+                ViewBag.categ = selectListItems;
+
+
                 if (id != null)
                 {
                     var x = Data.GetAllProducts().Find(elem => elem.ProductoId == id);
@@ -115,6 +128,7 @@ namespace AppWeb.Controllers
         {
             try
             {
+                model.CategoriaId = Convert.ToInt32(Request["category"]);
                 if (model != null)
                 {
                     Data.UpdateProduct(model);

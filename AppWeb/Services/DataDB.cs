@@ -190,7 +190,7 @@ namespace AppWeb.Services
             {
                 try
                 {
-                    dbConnection.Execute($"UpdateProduct '{product.ProductoId}','{product.Nombre}','{product.Precio}'");
+                    dbConnection.Execute($"UpdateProduct '{product.ProductoId}','{product.Nombre}','{product.Precio}','{product.CategoriaId}'");
                 }
                 catch (Exception ex)
                 {
