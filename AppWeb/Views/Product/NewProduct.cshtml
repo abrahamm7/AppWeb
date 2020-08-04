@@ -18,8 +18,8 @@
 
             <input type="text" id="priceproductbox" name="pricetxt" class="form-control mb-4" placeholder="Price">
             <div class="form-group">
-                @Html.DropDownList("category", ViewBag.categ as List<SelectListItem>,
-                                   "Select Category", new { @class = "form-control", @id = "listview" })
+                @Html.DropDownList("category", ViewBag.categ as List<SelectListItem>,"Select Category", new { @class = "form-control", @id = "listview" })
+                
             </div>
 
             <div class="text-right">

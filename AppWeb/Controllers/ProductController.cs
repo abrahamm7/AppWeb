@@ -23,8 +23,9 @@ namespace AppWeb.Controllers
             return View(obtainprodcuts);
         }      
        
+
         public ActionResult NewProduct()
-        {
+        {           
             Product product = new Product();
             var obtaincategories = Data.GetAllCategories();
             selectListItems = new List<SelectListItem>();
@@ -32,7 +33,7 @@ namespace AppWeb.Controllers
             {
                 selectListItems.Add(new SelectListItem
                 {
-                    Selected = (item.CategoriaId == item.CategoriaId),
+                    Selected = true,
                     Text = item.Categoria,
                     Value = item.CategoriaId.ToString()
                 });
@@ -43,16 +44,16 @@ namespace AppWeb.Controllers
                 string btnclick = Request["addproduct"];
                 if (btnclick == "Create")
                 {
-                    var p = selectListItems.Select(elem => elem.Value).ToList();
+                    var categorycode = Request["category"];
                     product.Nombre = Request["nametxt"];
                     product.Precio = Request["pricetxt"];
                     product.Categoria = Request["category"];
-                    product.CategoriaId = Convert.ToInt32(p.FirstOrDefault());
+                    product.CategoriaId = Convert.ToInt32(categorycode);
 
                     if (!string.IsNullOrEmpty(product.Nombre) || !string.IsNullOrEmpty(product.Precio) || !string.IsNullOrEmpty(product.CategoriaId.ToString()))
                     {
                         Data.InsertProduct(product);
-                    }                   
+                    }
                     return RedirectToAction("Index", "Product");
                 }
             }
