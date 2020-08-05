@@ -146,7 +146,7 @@ namespace AppWeb.Services
             {
                 try
                 {
-                    dbConnection.Execute($"InsertUser '{user.Nombre}', '{user.Apellido}','{user.Usuario}','{user.Clave}'");
+                    dbConnection.Execute($"InsertUser '{user.Nombre}', '{user.Apellido}','{user.Usuario}','{user.Clave}', '{user.Rol}'");
                 }
                 catch (Exception ex)
                 {
@@ -155,7 +155,7 @@ namespace AppWeb.Services
             }
         }
 
-        public void InsertProduct(Product product) //Insert user//
+        public void InsertProduct(Product product) //Insert Product//
         {
             using (IDbConnection dbConnection = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ToString()))
             {
@@ -170,7 +170,7 @@ namespace AppWeb.Services
             }
         }
 
-        public void DeleteProduct(int product) //Insert user//
+        public void DeleteProduct(int product) //Delete Product//
         {
             using (IDbConnection dbConnection = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ToString()))
             {
@@ -184,7 +184,7 @@ namespace AppWeb.Services
                 }
             }
         }
-        public void UpdateProduct(Product product) //Insert user//
+        public void UpdateProduct(Product product) //Update Product//
         {
             using (IDbConnection dbConnection = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ToString()))
             {
@@ -195,6 +195,37 @@ namespace AppWeb.Services
                 catch (Exception ex)
                 {
                     Debug.WriteLine(ex.Message);
+                }
+            }
+        }
+        public void ProcessPurchase(int user, int id) //Purchase Product//
+        {
+            using (IDbConnection dbConnection = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ToString()))
+            {
+                try
+                {
+                    dbConnection.Execute($"PurchaseItems '{user}', '{id}'");
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                }
+            }
+        }
+
+        public List<Factura> ItemsPurchased() //Get items purchased//
+        {
+            using (IDbConnection dbConnection = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ToString()))
+            {
+                try
+                {
+                    var output = dbConnection.Query<Factura>("Receips", CommandType.StoredProcedure).ToList();
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                    return null;
                 }
             }
         }

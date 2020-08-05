@@ -12,5 +12,7 @@ namespace AppWeb.Models
         public string Nombre { get; set; }
         public string Precio { get; set; }
         public string Categoria { get; set; }
+        public string Estado { get; set; }
+        public int Usuario { get; set; }
     }
 }
