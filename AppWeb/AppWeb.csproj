@@ -121,6 +121,7 @@
     <Compile Include="Controllers\CreateCategoryController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\ProfileUserController.cs" />
     <Compile Include="Controllers\UserRegisterController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -155,6 +156,7 @@
     <Content Include="Views\Product\EditProduct.cshtml" />
     <Content Include="Views\AllUsers\ViewUser.cshtml" />
     <Content Include="Views\CreateCategory\Index.cshtml" />
+    <Content Include="Views\ProfileUser\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
