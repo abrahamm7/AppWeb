@@ -46,6 +46,10 @@
                                 <div class="md-form mat-2">
                                     <input type="text" id="usertxt" name="usertxt" class="form-control" placeholder="Username">
                                 </div>
+                                <br />
+                                <div class="form-group">
+                                    @Html.DropDownList("Roles", ViewBag.categ as List<SelectListItem>, "Select Role", new { @class = "form-control", @id = "listview" })
+                                </div>
 
                                 <br />
                                 <div class="md-form mat-2">

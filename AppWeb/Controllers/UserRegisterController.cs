@@ -15,25 +15,45 @@ namespace AppWeb.Controllers
     public class UserRegisterController : Controller
     {
         IDataAccessDB Data = new DataDB();
+        User user = new User();
+        private List<SelectListItem> selectListItems;
+
         // GET: UserRegister
         public ActionResult Index()
         {
             try
             {
-                User user = new User();
                 string btnclick = Request["signuser"];
-                user.Nombre = Request["nametxt"];
-                user.Apellido = Request["lasttxt"];
-                user.Usuario = Request["usertxt"];
-                user.Clave = Request["passtxt"];
+                List<string> roles = new List<string>() { "ADMINISTRADOR", "USUARIO" };
+                selectListItems = new List<SelectListItem>();
+                foreach (var item in roles)
+                {
+                    selectListItems.Add(new SelectListItem
+                    {
+                        Selected = true,
+                        Text = item,
+                        Value = item
+                    });
+                }
+               
+                ViewBag.categ = selectListItems;
+              
+
                 if (btnclick == "SignUp")
                 {
-                    if(string.IsNullOrEmpty(user.Nombre) ||
+                    user.Nombre = Request["nametxt"];
+                    user.Apellido = Request["lasttxt"];
+                    user.Usuario = Request["usertxt"];
+                    user.Clave = Request["passtxt"];
+                    user.Rol = Request["Roles"];
+
+                    if (string.IsNullOrEmpty(user.Nombre) ||
                         string.IsNullOrEmpty(user.Apellido) ||
                         string.IsNullOrEmpty(user.Clave) ||
-                        string.IsNullOrEmpty(user.Usuario))
+                        string.IsNullOrEmpty(user.Usuario) ||
+                        string.IsNullOrEmpty(user.Rol))
                     {
-                        Debug.WriteLine("ss");
+                        Debug.WriteLine("Empty fields");
                     }
                     else
                     {
