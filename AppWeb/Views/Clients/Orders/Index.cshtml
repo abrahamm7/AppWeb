@@ -1,0 +1,30 @@
+﻿@model List<AppWeb.Models.Receip>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutUsers.cshtml";
+}
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+</head>
+<body>
+    <br />
+
+    <div class="jumbotron text-center" style="background-image: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%); ">
+        <h2>Orders</h2>
+    </div>
+    <div style="display:flex; justify-content:space-between; flex-direction:row; flex-wrap:wrap; justify-self:self-start;">
+        @foreach (var item in Model)
+        {
+            <div class="card border-primary mb-3 text-center" style="width:350px;">
+                <div class="card-body"><h5>@item.NombreProducto</h5></div>
+                <div class="card-footer">
+                    <p>Price: $@item.PrecioProducto</p>
+                </div>
+            </div>
+
+
+        }
+    </div>
+</body>
