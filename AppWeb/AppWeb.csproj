@@ -163,6 +163,7 @@
     <Content Include="Views\Shared\_LayoutUsers.cshtml" />
     <Content Include="Views\ViewUsers\Index.cshtml" />
     <Content Include="Views\Orders\Index.cshtml" />
+    <Content Include="Views\ProfileUser\EditUser.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
