@@ -15,16 +15,26 @@
         <h2>Orders</h2>
     </div>
     <div style="display:flex; justify-content:space-between; flex-direction:row; flex-wrap:wrap; justify-self:self-start;">
-        @foreach (var item in Model)
+        @if (Model == null || Model.Count == 0)
         {
-            <div class="card border-primary mb-3 text-center" style="width:350px;">
-                <div class="card-body"><h5>@item.NombreProducto</h5></div>
-                <div class="card-footer">
-                    <p>Price: $@item.PrecioProducto</p>
-                </div>
+            <div class="text-center">
+                <h3>No items</h3>
             </div>
-
-
         }
+        else
+        {
+            foreach (var item in Model)
+            {
+                <div class="card border-primary mb-3 text-center" style="width:350px;">
+                    <div class="card-body"><h5>@item.NombreProducto</h5></div>
+                    <div class="card-footer">
+                        <p>Price: $@item.PrecioProducto</p>
+                    </div>
+                </div>
+
+
+            }
+        }
+
     </div>
 </body>
