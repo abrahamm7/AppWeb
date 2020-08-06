@@ -46,3 +46,14 @@ function RequestForEditProduct() {
         window.alert("Empty fields");
     }
 }
+
+//Validation for edit user//
+function RequestEditUser() {
+    var username = document.getElementById("username").value;
+    var nameuser = document.getElementById("nameuser").value;
+    var lastuser = document.getElementById("lastuser").value;
+    var passuser = document.getElementById("passuser").value;
+    if (username.length == 0 || nameuser.length == 0 || lastuser.length == 0 || passuser.length == 0 ) {
+        window.alert("Empty fields");
+    }
+}

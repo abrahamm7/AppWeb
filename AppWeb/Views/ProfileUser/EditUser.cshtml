@@ -7,6 +7,7 @@
 <head>
     <title>Edit User</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script type="text/javascript" src="../JsClientSide/Validations.js"></script>
 
 </head>
 @using (Html.BeginForm())
@@ -69,7 +70,7 @@
                                     </svg>
                                     Back
                                 </a>
-                                <button class="btn btn-outline-success btn-group-lg my-4" style="width:150px" value="Edit" name="edituser">Edit</button>
+                                <button onclick="RequestEditUser()" class="btn btn-outline-success btn-group-lg my-4" style="width:150px" value="Edit" name="edituser">Edit</button>
                             </div>
                         </div>
                     </form>
