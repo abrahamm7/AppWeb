@@ -145,8 +145,11 @@ namespace AppWeb.Services
             using (IDbConnection dbConnection = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ToString()))
             {
                 try
-                {
-                    dbConnection.Execute($"InsertUser '{user.Nombre}', '{user.Apellido}','{user.Usuario}','{user.Clave}', '{user.Rol}'");
+                {                  
+                  
+                     dbConnection.Execute($"InsertUser '{user.Nombre}', '{user.Apellido}','{user.Usuario}','{user.Clave}', '{user.Rol}'");
+                         
+                   
                 }
                 catch (Exception ex)
                 {
@@ -184,6 +187,7 @@ namespace AppWeb.Services
                 }
             }
         }
+        
         public void UpdateProduct(Product product) //Update Product//
         {
             using (IDbConnection dbConnection = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ToString()))
@@ -198,6 +202,7 @@ namespace AppWeb.Services
                 }
             }
         }
+       
         public void ProcessPurchase(int user, int id) //Purchase Product//
         {
             using (IDbConnection dbConnection = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ToString()))
@@ -213,13 +218,13 @@ namespace AppWeb.Services
             }
         }
 
-        public List<Factura> ItemsPurchased() //Get items purchased//
+        public List<Receip> ItemsPurchased() //Get items purchased by users//
         {
             using (IDbConnection dbConnection = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ToString()))
             {
                 try
                 {
-                    var output = dbConnection.Query<Factura>("Receips", CommandType.StoredProcedure).ToList();
+                    var output = dbConnection.Query<Receip>("Receips", CommandType.StoredProcedure).ToList();
                     return output;
                 }
                 catch (Exception ex)

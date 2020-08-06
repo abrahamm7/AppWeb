@@ -15,8 +15,16 @@ namespace AppWeb.Controllers
         IDataAccessDB Data = new DataDB();        
         public ActionResult Index()
         {
-            var obtainproducts = Data.GetAllProducts();
-            return View(obtainproducts);
+            try
+            {
+                var obtainproducts = Data.GetAllProducts();
+                return View(obtainproducts);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return View();
+            }
         }
         [HttpGet]
         public ActionResult BuyProduct(int id)

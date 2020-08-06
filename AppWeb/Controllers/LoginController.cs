@@ -14,8 +14,7 @@ namespace AppWeb.Controllers
     public class LoginController : Controller
     {
         IDataAccessDB Data = new DataDB();
-        private List<SelectListItem> selectListItems;
-        HttpCookie cookie = new HttpCookie("cookie");       
+        HttpCookie cookie = new HttpCookie("cookie");     
 
         // GET: Login
         public ActionResult Index()

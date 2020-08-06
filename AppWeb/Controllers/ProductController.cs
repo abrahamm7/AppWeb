@@ -19,26 +19,23 @@ namespace AppWeb.Controllers
         // GET: Product
         public ActionResult Index()
         {
-            var obtainprodcuts = Data.GetAllProducts();
-            return View(obtainprodcuts);
+            try
+            {
+                var obtainprodcuts = Data.GetAllProducts();
+                return View(obtainprodcuts);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return View();
+            }
         }      
        
-
+        //New product//
         public ActionResult NewProduct()
         {           
             Product product = new Product();
-            var obtaincategories = Data.GetAllCategories();
-            selectListItems = new List<SelectListItem>();
-            foreach (var item in obtaincategories)
-            {
-                selectListItems.Add(new SelectListItem
-                {
-                    Selected = true,
-                    Text = item.Categoria,
-                    Value = item.CategoriaId.ToString()
-                });
-            }
-            ViewBag.categ = selectListItems;
+            FillDropDownList();
             try
             {
                 string btnclick = Request["addproduct"];
@@ -146,6 +143,21 @@ namespace AppWeb.Controllers
             }
             
         }
-
+        //Fill Dropdown//
+        public void FillDropDownList()
+        {
+            var obtaincategories = Data.GetAllCategories();
+            selectListItems = new List<SelectListItem>();
+            foreach (var item in obtaincategories)
+            {
+                selectListItems.Add(new SelectListItem
+                {
+                    Selected = true,
+                    Text = item.Categoria,
+                    Value = item.CategoriaId.ToString()
+                });
+            }
+            ViewBag.categ = selectListItems;
+        }
     }
 }

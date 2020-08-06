@@ -22,6 +22,6 @@ namespace AppWeb.Services
         void DeleteProduct(int id);
         void UpdateProduct(Product product);
         void ProcessPurchase(int user, int id);
-        List<Factura> ItemsPurchased();
+        List<Receip> ItemsPurchased();
     }
 }

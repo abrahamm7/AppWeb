@@ -5,7 +5,7 @@ using System.Web;
 
 namespace AppWeb.Models
 {
-    public class Factura
+    public class Receip
     {
         public int IDReceip { get; set; }
         public string NombreProducto { get; set; }

@@ -24,20 +24,8 @@ namespace AppWeb.Controllers
             try
             {
                 string btnclick = Request["signuser"];
-                List<string> roles = new List<string>() { "ADMINISTRADOR", "USUARIO" };
-                selectListItems = new List<SelectListItem>();
-                foreach (var item in roles)
-                {
-                    selectListItems.Add(new SelectListItem
-                    {
-                        Selected = true,
-                        Text = item,
-                        Value = item
-                    });
-                }
-               
-                ViewBag.categ = selectListItems;
-              
+
+                FillDropDownList();             
 
                 if (btnclick == "SignUp")
                 {
@@ -47,18 +35,26 @@ namespace AppWeb.Controllers
                     user.Clave = Request["passtxt"];
                     user.Rol = Request["Roles"];
 
-                    if (string.IsNullOrEmpty(user.Nombre) ||
-                        string.IsNullOrEmpty(user.Apellido) ||
-                        string.IsNullOrEmpty(user.Clave) ||
-                        string.IsNullOrEmpty(user.Usuario) ||
-                        string.IsNullOrEmpty(user.Rol))
+                    var searchuser = Data.GetAllUsers().Where(elem => elem.Usuario == user.Usuario).ToList(); //Search user with the same username//
+                    if (searchuser.Count == 0)
                     {
-                        Debug.WriteLine("Empty fields");
+                        if (string.IsNullOrEmpty(user.Nombre) ||
+                       string.IsNullOrEmpty(user.Apellido) ||
+                       string.IsNullOrEmpty(user.Clave) ||
+                       string.IsNullOrEmpty(user.Usuario) ||
+                       string.IsNullOrEmpty(user.Rol))
+                        {
+                            Debug.WriteLine("Empty fields");
+                        }
+                        else
+                        {
+                            Data.InsertUser(user);
+                        }
                     }
                     else
                     {
-                        Data.InsertUser(user);
-                    }
+                        Response.Write($"<script>alert('A user with {user.Usuario} already exists');</script>");
+                    }                   
                    
                 }
             }
@@ -67,6 +63,23 @@ namespace AppWeb.Controllers
                 Debug.WriteLine($"Error en: {ex.Message}");
             }
             return View();
+        }
+
+        public void FillDropDownList() //This is for fill the dropdownlist//
+        {
+            List<string> roles = new List<string>() { "ADMINISTRADOR", "USUARIO" };
+            selectListItems = new List<SelectListItem>();
+            foreach (var item in roles)
+            {
+                selectListItems.Add(new SelectListItem
+                {
+                    Selected = true,
+                    Text = item,
+                    Value = item
+                });
+            }
+
+            ViewBag.categ = selectListItems;
         }
     }
 }
