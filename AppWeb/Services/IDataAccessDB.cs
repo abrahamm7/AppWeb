@@ -9,19 +9,19 @@ namespace AppWeb.Services
 {
     public interface IDataAccessDB
     {
-        List<User> GetAllUsers();
-        List<Product> GetAllProducts();
-        List<Category> GetAllCategories();
-        void InsertCategory(Category category);
-        void DeleteCategory(string category);
-        void EditCategory(Category category);
-        void DeleteUser(int id);
-        void EditUser(User user);
-        void InsertUser(User user);
-        void InsertProduct(Product product);
-        void DeleteProduct(int id);
-        void UpdateProduct(Product product);
-        void ProcessPurchase(int user, int id);
-        List<Receip> ItemsPurchased();
+        List<User> GetAllUsers(); //Get all users//
+        List<Product> GetAllProducts(); //Get all products//
+        List<Category> GetAllCategories(); //Get all categories//
+        void InsertCategory(Category category); //Insert category//
+        void DeleteCategory(string category); //delete category//
+        void EditCategory(Category category); //Edit category//
+        void DeleteUser(int id); //Delete user//
+        void EditUser(User user); //Edit user//
+        void InsertUser(User user); //Insert user//
+        void InsertProduct(Product product); //Insert product//
+        void DeleteProduct(int id); //Delete Product//
+        void UpdateProduct(Product product); //Update product//
+        void ProcessPurchase(int user, int id); //Purchase item//
+        List<Receip> ItemsPurchased(); //Get all items purchased//
     }
 }
