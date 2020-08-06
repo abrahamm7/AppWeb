@@ -43,7 +43,7 @@ namespace AppWeb.Controllers
             }
         }
         [HttpGet]
-        public ActionResult BuyProduct(int id)
+        public ActionResult BuyProduct(int id) //Buy item//
         {
             try
             {
@@ -66,7 +66,7 @@ namespace AppWeb.Controllers
             }
         }
    
-        public List<Product> SearchItem(List<Product> products, string input)
+        public List<Product> SearchItem(List<Product> products, string input) //Search item in list//
         {
             var productsearch = products.Where(elem => elem.Categoria == input).ToList();
             return productsearch;
