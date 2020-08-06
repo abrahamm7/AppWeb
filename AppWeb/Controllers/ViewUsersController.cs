@@ -18,6 +18,22 @@ namespace AppWeb.Controllers
             try
             {
                 var obtainproducts = Data.GetAllProducts();
+                string btnclick = Request["searchitem"];
+                string txtinput = Request["itemtxt"];
+                if (btnclick == "Search")
+                {
+                    var ProductResult = SearchItem(obtainproducts, txtinput);
+                    if (ProductResult.Count == 0)
+                    {
+                        Response.Write($"<script>alert('Category not found');</script>");
+
+                    }
+                    else
+                    {
+                        return View(ProductResult);
+                    }
+                   
+                }
                 return View(obtainproducts);
             }
             catch (Exception ex)
@@ -48,6 +64,12 @@ namespace AppWeb.Controllers
                 Debug.WriteLine(ex.Message);
                 return RedirectToAction("Index", "ViewUsers");
             }
+        }
+   
+        public List<Product> SearchItem(List<Product> products, string input)
+        {
+            var productsearch = products.Where(elem => elem.Categoria == input).ToList();
+            return productsearch;
         }
     }
 }
