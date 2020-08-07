@@ -15,7 +15,7 @@ namespace AppWeb.Controllers
 {
     public class CategoriesController : Controller
     {
-        IDataAccessDB Data = new DataDB();
+        ICategoryModule Data = new CategoryModule();
         // GET: Categories
         public ActionResult Index()
         {           

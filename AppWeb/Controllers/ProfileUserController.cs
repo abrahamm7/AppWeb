@@ -11,7 +11,7 @@ namespace AppWeb.Controllers
 {
     public class ProfileUserController : Controller
     {
-        IDataAccessDB Data = new DataDB();
+        IUserModule Data = new UserModule();
 
         // GET: ProfileUser
         public ActionResult Index()

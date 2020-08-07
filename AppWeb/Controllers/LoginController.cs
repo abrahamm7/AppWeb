@@ -13,7 +13,7 @@ namespace AppWeb.Controllers
 {
     public class LoginController : Controller
     {
-        IDataAccessDB Data = new DataDB();
+        IUserModule Data = new UserModule();
         HttpCookie cookie = new HttpCookie("cookie");     
 
         // GET: Login

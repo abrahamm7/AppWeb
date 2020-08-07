@@ -128,12 +128,20 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Receip.cs" />
-    <Compile Include="Services\DataDB.cs" />
-    <Compile Include="Services\IDataAccessDB.cs" />
+    <Compile Include="Services\CategoryModule.cs" />
+    <Compile Include="Services\UserModule.cs" />
+    <Compile Include="Services\ICategoryModule.cs" />
+    <Compile Include="Services\IUserModule.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IProductModule.cs" />
+    <Compile Include="Services\IPurchase.cs" />
+    <Compile Include="Services\IReceipModule.cs" />
+    <Compile Include="Services\ProductModule.cs" />
+    <Compile Include="Services\PurchaseModule.cs" />
+    <Compile Include="Services\ReceipModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />

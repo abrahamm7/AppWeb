@@ -1,4 +1,5 @@
-﻿using AppWeb.Services;
+﻿using AppWeb.Models;
+using AppWeb.Services;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,7 +11,7 @@ namespace AppWeb.Controllers
 {
     public class OrdersController : Controller
     {
-        IDataAccessDB Data = new DataDB();
+        IReceipModule Data = new ReceipModule();
 
         // GET: Orders
         public ActionResult Index()

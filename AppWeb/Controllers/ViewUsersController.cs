@@ -12,20 +12,23 @@ namespace AppWeb.Controllers
     public class ViewUsersController : Controller
     {
         // GET: ViewUsers
-        IDataAccessDB Data = new DataDB();        
+        IProductModule ProductData = new ProductModule();
+        IPurchase PurchaseData = new PurchaseModule();
         public ActionResult Index()
         {
             try
             {
-                var obtainproducts = Data.GetAllProducts();
+                var obtainproducts = ProductData.GetAllProducts();
                 string btnclick = Request["searchitem"];
                 string txtinput = Request["itemtxt"];
                 if (btnclick == "Search")
                 {
-                    var ProductResult = SearchItem(obtainproducts, txtinput);
+                    var ProductResult = SearchItem(txtinput);
+
                     if (ProductResult.Count == 0)
                     {
-                        Response.Write($"<script>alert('Category not found');</script>");
+                        Debug.WriteLine("Empty list");
+                        return View(ProductResult);
 
                     }
                     else
@@ -51,7 +54,7 @@ namespace AppWeb.Controllers
                 var userid = Convert.ToInt32(reqCookies["iduser"]);
                 if (id != null && User != null)
                 {
-                    Data.ProcessPurchase(userid, id);
+                    PurchaseData.ProcessPurchase(userid, id);
                     return RedirectToAction("Index", "ViewUsers");
                 }
                 else
@@ -66,9 +69,9 @@ namespace AppWeb.Controllers
             }
         }
    
-        public List<Product> SearchItem(List<Product> products, string input) //Search item in list//
+        public List<Product> SearchItem(string input) //Search item in list//
         {
-            var productsearch = products.Where(elem => elem.Categoria == input).ToList();
+            var productsearch = ProductData.FilterProductByCategories(input);
             return productsearch;
         }
     }

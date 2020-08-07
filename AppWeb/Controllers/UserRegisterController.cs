@@ -14,7 +14,7 @@ namespace AppWeb.Controllers
 {
     public class UserRegisterController : Controller
     {
-        IDataAccessDB Data = new DataDB();
+        IUserModule Data = new UserModule();
         User user = new User();
         private List<SelectListItem> selectListItems;
 

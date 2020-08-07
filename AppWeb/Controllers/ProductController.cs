@@ -15,7 +15,8 @@ namespace AppWeb.Controllers
     public class ProductController : Controller
     {
         private List<SelectListItem> selectListItems;
-        IDataAccessDB Data = new DataDB();
+        IProductModule Data = new ProductModule();
+        ICategoryModule CategoryData = new CategoryModule();
         // GET: Product
         public ActionResult Index()
         {
@@ -88,19 +89,19 @@ namespace AppWeb.Controllers
         {
             try
             {
-                var obtaincategories = Data.GetAllCategories(); 
-                selectListItems = new List<SelectListItem>();
-                foreach (var item in obtaincategories)//Fill list of categories//
-                {
-                    selectListItems.Add(new SelectListItem
-                    {
-                        Selected = true,
-                        Text = item.Categoria,
-                        Value = item.CategoriaId.ToString()
-                    });
-                }
-                ViewBag.categ = selectListItems;
-
+                //var obtaincategories = CategoryData.GetAllCategories(); 
+                //selectListItems = new List<SelectListItem>();
+                //foreach (var item in obtaincategories)//Fill list of categories//
+                //{
+                //    selectListItems.Add(new SelectListItem
+                //    {
+                //        Selected = true,
+                //        Text = item.Categoria,
+                //        Value = item.CategoriaId.ToString()
+                //    });
+                //}
+                //ViewBag.categ = selectListItems;
+                FillDropDownList();
 
                 if (id != null)
                 {
@@ -146,7 +147,7 @@ namespace AppWeb.Controllers
         //Fill Dropdown//
         public void FillDropDownList()
         {
-            var obtaincategories = Data.GetAllCategories();
+            var obtaincategories = CategoryData.GetAllCategories();
             selectListItems = new List<SelectListItem>();
             foreach (var item in obtaincategories)
             {

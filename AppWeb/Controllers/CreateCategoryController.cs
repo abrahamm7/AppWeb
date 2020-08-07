@@ -11,7 +11,7 @@ namespace AppWeb.Controllers
 {
     public class CreateCategoryController : Controller
     {
-        IDataAccessDB Data = new DataDB();
+        ICategoryModule Data = new CategoryModule();
         Category category = new Category();
 
         // GET: CreateCategory
