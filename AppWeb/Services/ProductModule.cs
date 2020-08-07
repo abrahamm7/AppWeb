@@ -80,7 +80,7 @@ namespace AppWeb.Services
             {
                 try
                 {
-                    var output = dbConnection.Query<Product>("FilterByProductCategory", CommandType.StoredProcedure).ToList();
+                    var output = dbConnection.Query<Product>($"FilterByProductCategory '{category}'", CommandType.StoredProcedure).ToList();
                     return output;
                 }
                 catch (Exception ex)
