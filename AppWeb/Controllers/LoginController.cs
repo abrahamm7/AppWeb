@@ -28,14 +28,14 @@ namespace AppWeb.Controllers
                     string password = Request["passtxt"];                
                     Response.Cookies.Add(cookie); //This coockie is for save the username//
                    
-                    var finduser = Data.GetAllUsers().Where(element => element.Usuario == user && element.Clave == password).ToList();                   
+                    var finduser = Data.GetAllUsers().Where(element => element.UserName == user && element.Password == password).ToList();                   
 
-                    if (finduser.Count != 0 && finduser.First().Rol == "ADMINISTRADOR")
+                    if (finduser.Count != 0 && finduser.First().Role == "ADMINISTRADOR")
                     {
                         cookie["iduser"] = finduser.First().UserId.ToString();
                         return RedirectToAction("Index", "Categories");
                     }
-                    else if(finduser.Count != 0 && finduser.First().Rol == "USUARIO")
+                    else if(finduser.Count != 0 && finduser.First().Role == "USUARIO")
                     {
                         cookie["iduser"] = finduser.First().UserId.ToString();
                         return RedirectToAction("Index", "ViewUsers");

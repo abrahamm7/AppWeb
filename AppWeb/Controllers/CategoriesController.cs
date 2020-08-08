@@ -50,7 +50,7 @@ namespace AppWeb.Controllers
         {
             if (model != null)
             {
-                var x = Data.GetAllCategories().Find(elem => elem.CategoriaId == model);
+                var x = Data.GetAllCategories().Find(elem => elem.IDCategory == model);
                 return View(x);               
             }
             else

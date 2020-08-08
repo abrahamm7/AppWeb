@@ -29,20 +29,20 @@ namespace AppWeb.Controllers
 
                 if (btnclick == "SignUp")
                 {
-                    user.Nombre = Request["nametxt"];
-                    user.Apellido = Request["lasttxt"];
-                    user.Usuario = Request["usertxt"];
-                    user.Clave = Request["passtxt"];
-                    user.Rol = Request["Roles"];
+                    user.Name = Request["nametxt"];
+                    user.LastName = Request["lasttxt"];
+                    user.UserName = Request["usertxt"];
+                    user.Password = Request["passtxt"];
+                    user.Role = Request["Roles"];
 
-                    var searchuser = Data.GetAllUsers().Where(elem => elem.Usuario == user.Usuario).ToList(); //Search user with the same username//
+                    var searchuser = Data.GetAllUsers().Where(elem => elem.UserName == user.UserName).ToList(); //Search user with the same username//
                     if (searchuser.Count == 0)
                     {
-                        if (string.IsNullOrEmpty(user.Nombre) ||
-                       string.IsNullOrEmpty(user.Apellido) ||
-                       string.IsNullOrEmpty(user.Clave) ||
-                       string.IsNullOrEmpty(user.Usuario) ||
-                       string.IsNullOrEmpty(user.Rol))
+                        if (string.IsNullOrEmpty(user.Name) ||
+                       string.IsNullOrEmpty(user.LastName) ||
+                       string.IsNullOrEmpty(user.Password) ||
+                       string.IsNullOrEmpty(user.UserName) ||
+                       string.IsNullOrEmpty(user.Role))
                         {
                             Debug.WriteLine("Empty fields");
                         }
@@ -53,7 +53,7 @@ namespace AppWeb.Controllers
                     }
                     else
                     {
-                        Response.Write($"<script>alert('A user with {user.Usuario} already exists');</script>");
+                        Response.Write($"<script>alert('A user with {user.UserName} already exists');</script>");
                     }                   
                    
                 }

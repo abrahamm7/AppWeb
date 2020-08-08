@@ -22,10 +22,10 @@ namespace AppWeb.Controllers
                 string btnclick = Request["createcategory"];
                 if (btnclick == "Create")
                 {
-                    category.Categoria = Request["categorytxt"];
-                    category.Descripcion = Request["desctxt"];
+                    category.CategoryName = Request["categorytxt"];
+                    category.DescriptionCategory = Request["desctxt"];
 
-                    if (!string.IsNullOrEmpty(category.Categoria) || !string.IsNullOrEmpty(category.Descripcion))
+                    if (!string.IsNullOrEmpty(category.CategoryName) || !string.IsNullOrEmpty(category.DescriptionCategory))
                     {
                         Data.InsertCategory(category);
                     }

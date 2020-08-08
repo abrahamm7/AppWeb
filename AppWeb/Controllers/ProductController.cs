@@ -42,11 +42,11 @@ namespace AppWeb.Controllers
                 string btnclick = Request["addproduct"];
                 if (btnclick == "Create")
                 {
-                    product.Nombre = Request["nametxt"];
-                    product.Precio = Request["pricetxt"];
-                    product.CategoriaId = Convert.ToInt32(Request["category"]);
+                    product.NameProduct = Request["nametxt"];
+                    product.PriceProduct = Request["pricetxt"];
+                    product.IDCategory = Convert.ToInt32(Request["category"]);
 
-                    if (!string.IsNullOrEmpty(product.Nombre) &&  !string.IsNullOrEmpty(product.Precio) && !string.IsNullOrEmpty(product.CategoriaId.ToString()))
+                    if (!string.IsNullOrEmpty(product.NameProduct) &&  !string.IsNullOrEmpty(product.PriceProduct) && !string.IsNullOrEmpty(product.IDCategory.ToString()))
                     {
                         Data.InsertProduct(product);
                         return RedirectToAction("Index", "Product");
@@ -89,23 +89,11 @@ namespace AppWeb.Controllers
         {
             try
             {
-                //var obtaincategories = CategoryData.GetAllCategories(); 
-                //selectListItems = new List<SelectListItem>();
-                //foreach (var item in obtaincategories)//Fill list of categories//
-                //{
-                //    selectListItems.Add(new SelectListItem
-                //    {
-                //        Selected = true,
-                //        Text = item.Categoria,
-                //        Value = item.CategoriaId.ToString()
-                //    });
-                //}
-                //ViewBag.categ = selectListItems;
                 FillDropDownList();
 
                 if (id != null)
                 {
-                    var x = Data.GetAllProducts().Find(elem => elem.ProductoId == id);
+                    var x = Data.GetAllProducts().Find(elem => elem.IDProduct == id);
                     return View(x);
                 }
                 else
@@ -126,8 +114,8 @@ namespace AppWeb.Controllers
         {
             try
             {
-                model.CategoriaId = Convert.ToInt32(Request["category"]);
-                if (model.Nombre != null && model.Precio != null && model.CategoriaId != 0)
+                model.IDCategory = Convert.ToInt32(Request["category"]);
+                if (model.CategoryName != null && model.PriceProduct != null && model.IDCategory != 0)
                 {
                     Data.UpdateProduct(model);
                 }
@@ -154,8 +142,8 @@ namespace AppWeb.Controllers
                 selectListItems.Add(new SelectListItem
                 {
                     Selected = true,
-                    Text = item.Categoria,
-                    Value = item.CategoriaId.ToString()
+                    Text = item.CategoryName,
+                    Value = item.IDCategory.ToString()
                 });
             }
             ViewBag.categ = selectListItems;

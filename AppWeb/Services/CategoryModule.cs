@@ -35,7 +35,7 @@ namespace AppWeb.Services
             {
                 try
                 {
-                    dbConnection.Execute($"InsertCategory '{category.Categoria}','{category.Descripcion}'");
+                    dbConnection.Execute($"InsertCategory '{category.CategoryName}','{category.DescriptionCategory}'");
                 }
                 catch (Exception ex)
                 {
@@ -65,7 +65,7 @@ namespace AppWeb.Services
             {
                 try
                 {
-                    dbConnection.Execute($"UpdateCategory '{category.CategoriaId}', '{category.Categoria}','{category.Descripcion}'");
+                    dbConnection.Execute($"UpdateCategory '{category.IDCategory}', '{category.CategoryName}','{category.DescriptionCategory}'");
                 }
                 catch (Exception ex)
                 {

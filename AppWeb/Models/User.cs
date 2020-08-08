@@ -8,10 +8,10 @@ namespace AppWeb.Models
     public class User
     {
         public int UserId { get; set; }
-        public string Usuario { get; set; }
-        public string Nombre { get; set; }
-        public string Apellido { get; set; }
-        public string Clave { get; set; }
-        public string Rol { get; set; }
+        public string UserName { get; set; }
+        public string Name { get; set; }
+        public string LastName { get; set; }
+        public string Password { get; set; }
+        public string Role { get; set; }
     }
 }

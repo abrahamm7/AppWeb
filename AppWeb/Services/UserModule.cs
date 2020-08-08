@@ -52,7 +52,7 @@ namespace AppWeb.Services
             {
                 try
                 {
-                    dbConnection.Execute($"UpdateUser '{user.UserId}', '{user.Nombre}','{user.Apellido}','{user.Clave}','{user.Usuario}'");
+                    dbConnection.Execute($"UpdateUser '{user.UserId}', '{user.Name}','{user.LastName}','{user.Password}','{user.UserName}'");
                 }
                 catch (Exception ex)
                 {
@@ -68,7 +68,7 @@ namespace AppWeb.Services
                 try
                 {                  
                   
-                     dbConnection.Execute($"InsertUser '{user.Nombre}', '{user.Apellido}','{user.Usuario}','{user.Clave}', '{user.Rol}'");
+                     dbConnection.Execute($"InsertUser '{user.Name}', '{user.LastName}','{user.UserName}','{user.Password}', '{user.Role}'");
                          
                    
                 }

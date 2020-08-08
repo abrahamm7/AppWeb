@@ -21,21 +21,21 @@
                             <div class="text-left">
                                 <h6>Code of product</h6>
                             </div>
-                            @Html.TextBoxFor(model => model.ProductoId, new { @class = "form-control", @id = "idproducto", @readonly = "readonly" })
+                            @Html.TextBoxFor(model => model.IDProduct, new { @class = "form-control", @id = "idproducto", @readonly = "readonly" })
                         </div>
                         <br />
                         <div class="md-form mat-2">
                             <div class="text-left">
                                <h6>Code of category</h6>
                             </div>
-                            @Html.TextBoxFor(model => model.CategoriaId, new { @class = "form-control", @id = "idcategoriatxt", @readonly = "readonly" })
+                            @Html.TextBoxFor(model => model.IDCategory, new { @class = "form-control", @id = "idcategoriatxt", @readonly = "readonly" })
                         </div>
                         <br />
                         <div class="md-form mat-2">
                             <div class="text-left">
                                 <h6>Name</h6>
                             </div>
-                            @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @id = "nombretxt" })
+                            @Html.TextBoxFor(model => model.NameProduct, new { @class = "form-control", @id = "nombretxt" })
                         </div>
                         <br />
                         <div class="md-form mat-2">
@@ -43,7 +43,7 @@
                                 <h6>Price</h6>
                             </div>
                             
-                            @Html.TextBoxFor(model => model.Precio, new { @class = "form-control", @id = "preciotxt" })
+                            @Html.TextBoxFor(model => model.PriceProduct, new { @class = "form-control", @id = "preciotxt" })
                         </div>
                         <br />
                         <div class="md-form mat-2">
@@ -51,7 +51,7 @@
                                 <h6>Category</h6>
                             </div>
                             
-                            @Html.TextBoxFor(model => model.Categoria, new { @class = "form-control", @id = "categoriatxt", @readonly = "readonly" })
+                            @Html.TextBoxFor(model => model.CategoryName, new { @class = "form-control", @id = "categoriatxt", @readonly = "readonly" })
                         </div>
                         <br />
                         <div class="form-group">

@@ -20,7 +20,7 @@ namespace AppWeb.Controllers
             var userid = Convert.ToInt32(reqCookies["iduser"]);
             try
             {
-                var itemspurchased = Data.ItemsPurchased().Where(elem => elem.UsuarioID == userid).ToList();
+                var itemspurchased = Data.ItemsPurchased().Where(elem => elem.UserId == userid).ToList();
                 return View(itemspurchased);
             }
             catch (Exception ex)

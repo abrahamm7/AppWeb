@@ -7,8 +7,9 @@ namespace AppWeb.Models
 {
     public class Category
     {
-        public int CategoriaId { get; set; }
-        public string Categoria { get; set; }
-        public string Descripcion { get; set; }
+        public int IDCategory { get; set; }
+        public string CategoryName { get; set; }
+        public string DescriptionCategory { get; set; }
+        public DateTime DateCreated { get; set; }
     }
 }

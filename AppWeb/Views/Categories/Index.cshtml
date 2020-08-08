@@ -35,14 +35,14 @@
                 foreach (var item in Model)
                 {
                     <div class="card-header">
-                        <h6>@item.Categoria</h6>
+                        <h6>@item.CategoryName</h6>
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">Description</h5>
-                        <p class="card-title">@item.Descripcion</p>
+                        <p class="card-title">@item.DescriptionCategory</p>
                         <div class="text-right">
-                            @Html.ActionLink("Edit", "EditCategory", new { model = item.CategoriaId }, new { @class = "btn btn-outline-primary" })
-                            @Html.ActionLink("Delete", "DeleteCategory", new { model = item.Categoria }, new { @class = "btn btn-outline-danger" })
+                            @Html.ActionLink("Edit", "EditCategory", new { model = item.IDCategory }, new { @class = "btn btn-outline-primary" })
+                            @Html.ActionLink("Delete", "DeleteCategory", new { model = item.CategoryName }, new { @class = "btn btn-outline-danger" })
                         </div>
                     </div>
                 }
