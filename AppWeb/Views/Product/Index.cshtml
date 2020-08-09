@@ -38,9 +38,11 @@
                 <div class="card-body">
                     <p class="card-text">Category of this product</p>
                     <p class="card-text">@item.CategoryName</p>
+                    <p class="card-text">Quantity</p>
+                    <h3 class="card-text">@item.Stock</h3>
                 </div>
                 <div class="card-footer">
-                    <p>Price: $@item.PriceProduct</p>
+                    <h3>Price: $@item.PriceProduct</h3>
                     <div class="text-right">
                         @Html.ActionLink("Edit", "EditProduct", new { id = item.IDProduct }, new { @class = "btn btn-outline-primary" })
                         @Html.ActionLink("Delete", "DeleteProduct", new { id = item.IDProduct }, new { @class = "btn btn-outline-danger" })

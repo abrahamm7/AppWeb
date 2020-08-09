@@ -17,9 +17,9 @@
 
             <input type="text" id="priceproductbox" name="pricetxt" class="form-control mb-4" placeholder="Price">
             <div class="form-group">
-                @Html.DropDownList("category", ViewBag.categ as List<SelectListItem>,"Select Category", new { @class = "form-control", @id = "listview" })
-                
+                @Html.DropDownList("category", ViewBag.categ as List<SelectListItem>, "Select Category", new { @class = "form-control", @id = "listview" })
             </div>
+            <input type="text" id="stock" name="stocktxt" class="form-control mb-4" placeholder="Stock">
 
             <div class="text-right">
                 <a class="btn btn-outline-primary" href="@Url.Action("Index", "Product")" style="width:150px">

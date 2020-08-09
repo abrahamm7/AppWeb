@@ -44,9 +44,10 @@ namespace AppWeb.Controllers
                 {
                     product.NameProduct = Request["nametxt"];
                     product.PriceProduct = Request["pricetxt"];
+                    product.Stock = Convert.ToInt32(Request["stocktxt"]);
                     product.IDCategory = Convert.ToInt32(Request["category"]);
 
-                    if (!string.IsNullOrEmpty(product.NameProduct) &&  !string.IsNullOrEmpty(product.PriceProduct) && !string.IsNullOrEmpty(product.IDCategory.ToString()))
+                    if (!string.IsNullOrEmpty(product.NameProduct) && !string.IsNullOrEmpty(product.Stock.ToString()) && !string.IsNullOrEmpty(product.PriceProduct) && !string.IsNullOrEmpty(product.IDCategory.ToString()))
                     {
                         Data.InsertProduct(product);
                         return RedirectToAction("Index", "Product");
