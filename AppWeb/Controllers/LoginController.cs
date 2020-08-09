@@ -53,6 +53,31 @@ namespace AppWeb.Controllers
             }           
             return View();
             
-        }   
+        }
+        
+        public ActionResult Login()
+        {
+            string user = Request["usertxt"];
+            string password = Request["passtxt"];
+            Response.Cookies.Add(cookie); //This coockie is for save the username//
+
+            var finduser = Data.GetAllUsers().Where(element => element.UserName == user && element.Password == password).ToList();
+
+            if (finduser.Count != 0 && finduser.First().Role == "ADMINISTRADOR")
+            {
+                cookie["iduser"] = finduser.First().UserId.ToString();
+                return RedirectToAction("Index", "Categories");
+            }
+            else if (finduser.Count != 0 && finduser.First().Role == "USUARIO")
+            {
+                cookie["iduser"] = finduser.First().UserId.ToString();
+                return RedirectToAction("Index", "ViewUsers");
+            }
+            if (finduser.Count == 0)
+            {
+                return View();
+            }
+            return View();
+        }
     }
 }

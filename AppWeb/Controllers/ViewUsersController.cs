@@ -18,7 +18,7 @@ namespace AppWeb.Controllers
         {
             try
             {
-                var obtainproducts = ProductData.GetAllProducts();
+                var obtainproducts = ProductData.GetAllProducts().Where(elem => elem.Stock > 0).ToList();
                 string btnclick = Request["searchitem"];
                 string txtinput = Request["itemtxt"];
                 if (btnclick == "Search")
@@ -71,7 +71,7 @@ namespace AppWeb.Controllers
    
         public List<Product> SearchItem(string input) //Search item in list//
         {
-            var productsearch = ProductData.FilterProductByCategories(input);
+            var productsearch = ProductData.FilterProductByCategories(input).Where(elem => elem.Stock > 0).ToList();
             return productsearch;
         }
     }
