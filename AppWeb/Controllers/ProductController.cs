@@ -127,7 +127,7 @@ namespace AppWeb.Controllers
                     !string.IsNullOrEmpty(model.NameProduct))
                 {
                     Data.UpdateProduct(model);
-                    return RedirectToAction("Index","Product");
+                    return View("Index");
                 }
                 else
                 {
