@@ -100,7 +100,6 @@
     <Content Include="Global.asax" />
     <Content Include="Images\Ideas.jpg" />
     <Content Include="Images\Regis.jpg" />
-    <Content Include="JsClientSide\Validations.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
