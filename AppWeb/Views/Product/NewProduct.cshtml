@@ -1,41 +1,55 @@
-﻿@model List<AppWeb.Models.Category>
+﻿@model AppWeb.Models.Product
 
 @{
     ViewBag.Title = "New product";
 }
 
-    <head>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-        <script type="text/javascript" src="../JsClientSide/Validations.js"></script>
-    </head>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script type="text/javascript" src="../JsClientSide/Validations.js"></script>
+</head>
 <h2>New Product</h2>
+@using (Ajax.BeginForm("NewProduct", "Product", new AjaxOptions()
+{
+    HttpMethod = "POST",
+    InsertionMode = InsertionMode.Replace
+}))
+{
+    <form class="text-center border border-light p-5">
+        <div class="card">
+            <div class="card-body">
+                @Html.TextBoxFor(model => model.NameProduct, new { @class = "form-control", @placeholder = "Name" })
+                <br />
 
-<form class="text-center border border-light p-5">
-    <div class="card">
-        <div class="card-body">
-            <input type="text" id="nameproductbox" name="nametxt" class="form-control mb-4" placeholder="Name">
+                @Html.TextBoxFor(model => model.PriceProduct, new { @class = "form-control", @placeholder = "Price" })
+                <br />
+                <div class="form-group">
+                    @Html.DropDownList("category", ViewBag.categ as List<SelectListItem>, "Select Category", new { @class = "form-control", @id = "listview" })
+                </div>
+                <br />
+                @Html.TextBoxFor(model => model.Stock, new { @class = "form-control", @placeholder = "Stock" })
+                <br />
+                <div class="text-right">
+                    <a class="btn btn-outline-primary" href="@Url.Action("Index", "Product")" style="width:150px">
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-box-arrow-in-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M7.854 11.354a.5.5 0 0 0 0-.708L5.207 8l2.647-2.646a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708 0z" />
+                            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0 0 1h9A.5.5 0 0 0 15 8z" />
+                            <path fill-rule="evenodd" d="M2.5 14.5A1.5 1.5 0 0 1 1 13V3a1.5 1.5 0 0 1 1.5-1.5h8A1.5 1.5 0 0 1 12 3v1.5a.5.5 0 0 1-1 0V3a.5.5 0 0 0-.5-.5h-8A.5.5 0 0 0 2 3v10a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-1.5a.5.5 0 0 1 1 0V13a1.5 1.5 0 0 1-1.5 1.5h-8z" />
+                        </svg>
+                        Back
+                    </a>
+                    <button class="btn btn-outline-success" style="width:150px;" type="submit">Create</button>
+                    <br />
+                    <div class="md-form mat-2 text-center">
+                        <h5 class="text-danger">@ViewBag.Message</h5>
+                    </div>
+                </div>
+            
 
-            <input type="text" id="priceproductbox" name="pricetxt" class="form-control mb-4" placeholder="Price">
-            <div class="form-group">
-                @Html.DropDownList("category", ViewBag.categ as List<SelectListItem>, "Select Category", new { @class = "form-control", @id = "listview" })
+
             </div>
-            <input type="text" id="stock" name="stocktxt" class="form-control mb-4" placeholder="Stock">
-
-            <div class="text-right">
-                <a class="btn btn-outline-primary" href="@Url.Action("Index", "Product")" style="width:150px">
-                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-box-arrow-in-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M7.854 11.354a.5.5 0 0 0 0-.708L5.207 8l2.647-2.646a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708 0z" />
-                        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0 0 1h9A.5.5 0 0 0 15 8z" />
-                        <path fill-rule="evenodd" d="M2.5 14.5A1.5 1.5 0 0 1 1 13V3a1.5 1.5 0 0 1 1.5-1.5h8A1.5 1.5 0 0 1 12 3v1.5a.5.5 0 0 1-1 0V3a.5.5 0 0 0-.5-.5h-8A.5.5 0 0 0 2 3v10a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-1.5a.5.5 0 0 1 1 0V13a1.5 1.5 0 0 1-1.5 1.5h-8z" />
-                    </svg>
-                    Back
-                </a>
-                <button class="btn btn-outline-success" style="width:150px;" onclick="RequestNewProduct()" value="Create" id="signupbtn" name="addproduct" type="submit">Create</button>
-            </div>
-
 
         </div>
 
-    </div>
-   
-</form>
+    </form>
+}

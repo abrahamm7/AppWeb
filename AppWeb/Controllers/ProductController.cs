@@ -32,35 +32,35 @@ namespace AppWeb.Controllers
             }
         }      
        
-        //New product//
-        public ActionResult NewProduct()
+       
+        public ActionResult NewProduct()   //New product//
         {           
-            Product product = new Product();
             FillDropDownList();
-            try
-            {
-                string btnclick = Request["addproduct"];
-                if (btnclick == "Create")
-                {
-                    product.NameProduct = Request["nametxt"];
-                    product.PriceProduct = Request["pricetxt"];
-                    product.Stock = Convert.ToInt32(Request["stocktxt"]);
-                    product.IDCategory = Convert.ToInt32(Request["category"]);
-
-                    if (!string.IsNullOrEmpty(product.NameProduct) && !string.IsNullOrEmpty(product.Stock.ToString()) && !string.IsNullOrEmpty(product.PriceProduct) && !string.IsNullOrEmpty(product.IDCategory.ToString()))
-                    {
-                        Data.InsertProduct(product);
-                        return RedirectToAction("Index", "Product");
-                    }
-                    return View();
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"Error en: {ex.Message}");
-            }
+            ViewBag.Message = "";
             return View();
         }
+
+        [HttpPost]
+        public ActionResult NewProduct(Product product) //Post new product//
+        {
+            FillDropDownList();
+            product.IDCategory = Convert.ToInt32(Request["category"]);
+            if (string.IsNullOrEmpty(product.NameProduct) ||
+                product.Stock == 0 ||
+                string.IsNullOrEmpty(product.PriceProduct) ||
+                product.IDCategory == 0)
+            {
+                ViewBag.Message = "Empty fields";
+                return View();
+            }
+            else
+            {
+                Data.InsertProduct(product); //Method for insert new product in DB//
+                ViewBag.Message = "Success";
+                return View();
+            }
+        }
+
         //Delete product in db//
         [HttpGet]
         public ActionResult DeleteProduct(int id)

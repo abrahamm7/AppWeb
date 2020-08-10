@@ -35,7 +35,7 @@ namespace AppWeb.Services
             {
                 try
                 {
-                    dbConnection.Execute($"InsertProduct '{product.NameProduct}', '{product.PriceProduct}','{product.IDCategory}'");
+                    dbConnection.Execute($"InsertProduct '{product.NameProduct}', '{product.PriceProduct}','{product.IDCategory}','{product.Stock}'");
                 }
                 catch (Exception ex)
                 {
