@@ -178,6 +178,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Administrative\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <PropertyGroup>
