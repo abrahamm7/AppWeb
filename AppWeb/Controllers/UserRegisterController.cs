@@ -21,47 +21,43 @@ namespace AppWeb.Controllers
         // GET: UserRegister
         public ActionResult Index()
         {
+            FillDropDownList();
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Index(User user) //Register User in DB//
+        {
             try
             {
-                string btnclick = Request["signuser"];
-
-                FillDropDownList();             
-
-                if (btnclick == "SignUp")
+                FillDropDownList();
+                var searchuser = Data.GetAllUsers().Where(elem => elem.UserName == user.UserName).ToList(); //Search user with the same username//
+                user.Role = Request["Roles"];
+                if (searchuser.Count == 0)
                 {
-                    user.Name = Request["nametxt"];
-                    user.LastName = Request["lasttxt"];
-                    user.UserName = Request["usertxt"];
-                    user.Password = Request["passtxt"];
-                    user.Role = Request["Roles"];
-
-                    var searchuser = Data.GetAllUsers().Where(elem => elem.UserName == user.UserName).ToList(); //Search user with the same username//
-                    if (searchuser.Count == 0)
+                    if (string.IsNullOrEmpty(user.Name) ||
+                   string.IsNullOrEmpty(user.LastName) ||
+                   string.IsNullOrEmpty(user.Password) ||
+                   string.IsNullOrEmpty(user.UserName) ||
+                   string.IsNullOrEmpty(user.Role))
                     {
-                        if (string.IsNullOrEmpty(user.Name) ||
-                       string.IsNullOrEmpty(user.LastName) ||
-                       string.IsNullOrEmpty(user.Password) ||
-                       string.IsNullOrEmpty(user.UserName) ||
-                       string.IsNullOrEmpty(user.Role))
-                        {
-                            Debug.WriteLine("Empty fields");
-                        }
-                        else
-                        {
-                            Data.InsertUser(user);
-                        }
+                        ViewBag.Message = "Empty fields";
                     }
                     else
                     {
-                        Response.Write($"<script>alert('A user with {user.UserName} already exists');</script>");
-                    }                   
-                   
+                        Data.InsertUser(user); //Method for insert user//
+                        ViewBag.Message = "Success!";
+                    }
+                }
+                else
+                {
+                    ViewBag.Message = $"A user with {user.UserName} already exists";
                 }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Error en: {ex.Message}");
-            }
+                ViewBag.Message = $"Error: {ex.Message}";
+            }           
             return View();
         }
 
