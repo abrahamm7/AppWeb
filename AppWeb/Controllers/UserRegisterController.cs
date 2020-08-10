@@ -15,7 +15,6 @@ namespace AppWeb.Controllers
     public class UserRegisterController : Controller
     {
         IUserModule Data = new UserModule();
-        User user = new User();
         private List<SelectListItem> selectListItems;
 
         // GET: UserRegister
