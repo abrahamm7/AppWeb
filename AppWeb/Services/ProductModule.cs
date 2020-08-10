@@ -65,7 +65,7 @@ namespace AppWeb.Services
             {
                 try
                 {
-                    dbConnection.Execute($"UpdateProduct '{product.IDProduct}','{product.NameProduct}','{product.PriceProduct}','{product.IDCategory}'");
+                    dbConnection.Execute($"UpdateProduct '{product.IDProduct}','{product.NameProduct}','{product.PriceProduct}','{product.IDCategory}','{product.Stock}'");
                 }
                 catch (Exception ex)
                 {

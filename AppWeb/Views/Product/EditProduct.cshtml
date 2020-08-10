@@ -10,14 +10,18 @@
     </head>
 <h2>Edit Product</h2>
 
-@using (Html.BeginForm())
+@using (Ajax.BeginForm("EditProduct", "Product", new AjaxOptions() 
+{
+        HttpMethod = "POST",
+        InsertionMode = InsertionMode.Replace
+}))
 {
     <div class="row">
         <div class="col-lg-12" style="text-align:center;min-width:50%;max-width:100%; position:center">
             <div class="card">
                 <div class="card-body text-center">
                     <form class="text-center p-5">
-                        <div class="md-form mat-2">                          
+                        <div class="md-form mat-2">
                             <div class="text-left">
                                 <h6>Code of product</h6>
                             </div>
@@ -26,38 +30,46 @@
                         <br />
                         <div class="md-form mat-2">
                             <div class="text-left">
-                               <h6>Code of category</h6>
+                                <h6>Code of category</h6>
                             </div>
-                            @Html.TextBoxFor(model => model.IDCategory, new { @class = "form-control", @id = "idcategoriatxt", @readonly = "readonly" })
+                            @Html.TextBoxFor(model => model.IDCategory, new { @class = "form-control", @readonly = "readonly" })
                         </div>
                         <br />
                         <div class="md-form mat-2">
                             <div class="text-left">
                                 <h6>Name</h6>
                             </div>
-                            @Html.TextBoxFor(model => model.NameProduct, new { @class = "form-control", @id = "nombretxt" })
+                            @Html.TextBoxFor(model => model.NameProduct, new { @class = "form-control" })
                         </div>
                         <br />
                         <div class="md-form mat-2">
                             <div class="text-left">
                                 <h6>Price</h6>
                             </div>
-                            
-                            @Html.TextBoxFor(model => model.PriceProduct, new { @class = "form-control", @id = "preciotxt" })
+
+                            @Html.TextBoxFor(model => model.PriceProduct, new { @class = "form-control" })
                         </div>
                         <br />
                         <div class="md-form mat-2">
                             <div class="text-left">
                                 <h6>Category</h6>
                             </div>
-                            
-                            @Html.TextBoxFor(model => model.CategoryName, new { @class = "form-control", @id = "categoriatxt", @readonly = "readonly" })
+
+                            @Html.TextBoxFor(model => model.CategoryName, new { @class = "form-control", @readonly = "readonly" })
                         </div>
+
+                        <div class="md-form mat-2">
+                            <div class="text-left">
+                                <h6>Stock</h6>
+                            </div>
+                            @Html.TextBoxFor(model => model.Stock, new { @class = "form-control" })
+                        </div>
+
                         <br />
                         <div class="form-group">
                             <div class="text-left">
                                 <h6>Select new category</h6>
-                            </div>                           
+                            </div>
                             @Html.DropDownList("category", ViewBag.categ as List<SelectListItem>, "Select Category", new { @class = "form-control", @id = "listview" })
 
                         </div>
@@ -73,7 +85,12 @@
                                     </svg>
                                     Back
                                 </a>
-                                <input onclick="RequestForEditProduct()" class="btn btn-outline-success btn-group-lg my-4" style="width:150px" value="Save" type="submit">
+                                <button class="btn btn-outline-success btn-group-lg my-4" style="width:150px" type="submit">Edit</button>
+                                <br />
+                                <br />
+                                <div class="md-form mat-2 text-center">
+                                    <h5 class="text-danger">@ViewBag.Message</h5>
+                                </div>
                             </div>
                         </div>
                     </form>

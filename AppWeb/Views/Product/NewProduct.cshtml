@@ -24,7 +24,7 @@
                 @Html.TextBoxFor(model => model.PriceProduct, new { @class = "form-control", @placeholder = "Price" })
                 <br />
                 <div class="form-group">
-                    @Html.DropDownList("category", ViewBag.categ as List<SelectListItem>, "Select Category", new { @class = "form-control", @id = "listview" })
+                    @Html.DropDownList("category", ViewBag.categ as List<SelectListItem>, "Select Category", new { @class = "form-control" })
                 </div>
                 <br />
                 @Html.TextBoxFor(model => model.Stock, new { @class = "form-control", @placeholder = "Stock" })
@@ -43,10 +43,7 @@
                     <div class="md-form mat-2 text-center">
                         <h5 class="text-danger">@ViewBag.Message</h5>
                     </div>
-                </div>
-            
-
-
+                </div>         
             </div>
 
         </div>

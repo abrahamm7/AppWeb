@@ -32,19 +32,21 @@ namespace AppWeb.Controllers
             }
         }      
        
-       
-        public ActionResult NewProduct()   //New product//
+       //New product page//
+        public ActionResult NewProduct()
         {           
             FillDropDownList();
             ViewBag.Message = "";
             return View();
-        }
+        } 
 
+        //Post new product//
         [HttpPost]
-        public ActionResult NewProduct(Product product) //Post new product//
+        public ActionResult NewProduct(Product product) 
         {
             FillDropDownList();
-            product.IDCategory = Convert.ToInt32(Request["category"]);
+            product.IDCategory = Convert.ToInt32(Request["category"]); //Obtain value from dropdownlist//
+
             if (string.IsNullOrEmpty(product.NameProduct) ||
                 product.Stock == 0 ||
                 string.IsNullOrEmpty(product.PriceProduct) ||
@@ -59,7 +61,7 @@ namespace AppWeb.Controllers
                 ViewBag.Message = "Success";
                 return View();
             }
-        }
+        } 
 
         //Delete product in db//
         [HttpGet]
@@ -115,23 +117,29 @@ namespace AppWeb.Controllers
         {
             try
             {
-                model.IDCategory = Convert.ToInt32(Request["category"]);
-                if (model.CategoryName != null && model.PriceProduct != null && model.IDCategory != 0)
+                FillDropDownList();
+                model.IDCategory = Convert.ToInt32(Request["category"]); //Obtain value from dropdownlist//
+
+                if (!string.IsNullOrEmpty(model.CategoryName) &&
+                    !string.IsNullOrEmpty(model.PriceProduct) &&
+                    model.IDCategory != 0 &&
+                    model.Stock != 0 &&
+                    !string.IsNullOrEmpty(model.NameProduct))
                 {
                     Data.UpdateProduct(model);
+                    return RedirectToAction("Index","Product");
                 }
                 else
                 {
-                   return RedirectToAction("Index", "Product");
+                    return View();
                 }
-                return RedirectToAction("Index", "Product");
+                
             }
             catch (Exception ea)
             {
                 Debug.WriteLine($"Error: {ea.Message}");
                 return RedirectToAction("Index", "Product");
-            }
-            
+            }            
         }
         //Fill Dropdown//
         public void FillDropDownList()
