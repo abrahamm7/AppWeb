@@ -12,7 +12,6 @@ namespace AppWeb.Controllers
     public class CreateCategoryController : Controller
     {
         ICategoryModule Data = new CategoryModule();
-        Category category = new Category();
 
         // GET: CreateCategory
         public ActionResult Index()
@@ -21,18 +20,18 @@ namespace AppWeb.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateCategoty(Category category)
+        public ActionResult AddCategory(Category category)
         {
             if (!string.IsNullOrEmpty(category.CategoryName) || !string.IsNullOrEmpty(category.DescriptionCategory))
             {
                 category.DateCreated = DateTime.Now;
                 Data.InsertCategory(category);
+                return RedirectToAction("Index", "Categories");
             }
             else
             {
                 return View();
             }
-            return View("Index");
         }
     }
 }

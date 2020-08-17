@@ -12,10 +12,9 @@
     </head>
     <body style="background-image: linear-gradient(45deg, #93a5cf 0%, #e4efe9 100%);">
         <div id="divloginform">
-            @using (Ajax.BeginForm("Index", "Login", new AjaxOptions()
+            @using (Ajax.BeginForm("LoginUser", "Login", new AjaxOptions()
             {
-                HttpMethod = "POST",
-                InsertionMode = InsertionMode.Replace
+                HttpMethod = "POST"
 
             }))
             {

@@ -23,14 +23,14 @@ namespace AppWeb.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(User user) //Login for users//
+        public ActionResult LoginUser(User user) //Login for users//
         {
             try
             {
                 if (user.UserName == null || user.Password == null) //If model is empty, return a error message//
                 {
                     ViewBag.Message = "Empty fields"; 
-                    return View();
+                    return View("Index");
                 }
                 else
                 {
@@ -52,16 +52,16 @@ namespace AppWeb.Controllers
                     if (finduser.Count == 0 || finduser == null) //If list is empty, return a error message//
                     {
                         ViewBag.Message = "User not found";
-                        return View();
+                        return View("Index");
                     }
                 }
                 
-                return View();
+                return View("Index");
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-                return View();
+                return View("Index");
             }
            
         }
