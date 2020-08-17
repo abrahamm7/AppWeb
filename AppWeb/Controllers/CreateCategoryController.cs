@@ -17,30 +17,22 @@ namespace AppWeb.Controllers
         // GET: CreateCategory
         public ActionResult Index()
         {
-            try
-            {
-                string btnclick = Request["createcategory"];
-                if (btnclick == "Create")
-                {
-                    category.CategoryName = Request["categorytxt"];
-                    category.DescriptionCategory = Request["desctxt"];
+            return View();
+        }
 
-                    if (!string.IsNullOrEmpty(category.CategoryName) || !string.IsNullOrEmpty(category.DescriptionCategory))
-                    {
-                        Data.InsertCategory(category);
-                    }
-                    else
-                    {
-                        return View();
-                    }
-                }
-            }
-            catch (Exception ex)
+        [HttpPost]
+        public ActionResult CreateCategoty(Category category)
+        {
+            if (!string.IsNullOrEmpty(category.CategoryName) || !string.IsNullOrEmpty(category.DescriptionCategory))
             {
-                Debug.WriteLine($"{ex.Message}");
+                category.DateCreated = DateTime.Now;
+                Data.InsertCategory(category);
+            }
+            else
+            {
                 return View();
             }
-            return View();
+            return View("Index");
         }
     }
 }
