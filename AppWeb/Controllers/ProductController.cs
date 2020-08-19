@@ -36,7 +36,6 @@ namespace AppWeb.Controllers
         public ActionResult NewProduct()
         {           
             FillDropDownList();
-            ViewBag.Message = "";
             return View();
         } 
 
@@ -45,7 +44,6 @@ namespace AppWeb.Controllers
         public ActionResult NewProduct(Product product) 
         {
             FillDropDownList();
-            product.IDCategory = Convert.ToInt32(Request["category"]); //Obtain value from dropdownlist//
 
             if (string.IsNullOrEmpty(product.NameProduct) ||
                 product.Stock == 0 ||
