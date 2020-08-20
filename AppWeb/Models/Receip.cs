@@ -12,6 +12,5 @@ namespace AppWeb.Models
         public string PriceProduct { get; set; }
         public int UserId { get; set; }
         public int IdProduct { get; set; }
-        public int Quantity { get; set; }
     }
 }

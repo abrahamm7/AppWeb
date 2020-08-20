@@ -14,6 +14,7 @@ namespace AppWeb.Controllers
         // GET: ViewUsers
         IProductModule ProductData = new ProductModule();
         IPurchase PurchaseData = new PurchaseModule();
+      
         public ActionResult Index()
         {
             try
@@ -45,8 +46,8 @@ namespace AppWeb.Controllers
                 return View();
             }
         }
-        [HttpGet]
-        public ActionResult BuyProduct(int id) //Buy item//
+        [HttpPost]
+        public ActionResult BuyProduct(Product id) //Buy item//
         {
             try
             {
@@ -54,7 +55,7 @@ namespace AppWeb.Controllers
                 var userid = Convert.ToInt32(reqCookies["iduser"]);
                 if (id != null && User != null)
                 {
-                    PurchaseData.ProcessPurchase(userid, id);
+                   // PurchaseData.ProcessPurchase(userid, id);
                     return RedirectToAction("Index", "ViewUsers");
                 }
                 else

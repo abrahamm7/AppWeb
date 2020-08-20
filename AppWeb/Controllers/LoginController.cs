@@ -41,11 +41,13 @@ namespace AppWeb.Controllers
                     if (finduser.Count != 0 && finduser.First().Role == "ADMINISTRADOR") //If user is admin, navigate to page for CRUD operations//
                     {
                         cookie["iduser"] = finduser.First().UserId.ToString();
+                        Response.Cookies.Add(cookie);
                         return RedirectToAction("Index", "Categories");
                     }
                     else if (finduser.Count != 0 && finduser.First().Role == "USUARIO") //If user is usuario, navigate to page for purchase and view products//
                     {
                         cookie["iduser"] = finduser.First().UserId.ToString();
+                        Response.Cookies.Add(cookie);
                         return RedirectToAction("Index", "ViewUsers");
                     }
 
