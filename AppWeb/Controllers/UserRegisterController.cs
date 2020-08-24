@@ -50,7 +50,7 @@ namespace AppWeb.Controllers
                 }
                 else
                 {
-                    ViewBag.Message = $"A user with {user.UserName} already exists";
+                    ViewBag.Message = $"A user with username: {user.UserName} already exists";
                 }
             }
             catch (Exception ex)
